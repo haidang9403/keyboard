@@ -1,0 +1,23 @@
+{
+  "name": "ct275/e-commerce-keyboard",
+  "description": "E-commerce for keyboard",
+  "authors": [
+    {
+      "name": "Huynh Hai Dang",
+      "email": "dangb2111792@student.ctu.edu.vn"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "CT275\\App\\": "src/",
+      "CT275\\App\\Model\\": "src/models/",
+      "CT275\\App\\Controllers\\": "src/controllers"
+    },
+    "files": [
+      "src/helper/functions.php",
+      "src/db/connection.php"
+    ]
+  },
+  "minimum-stability": "beta",
+  "require": {}
+}
