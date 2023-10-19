@@ -9,9 +9,11 @@
   ],
   "autoload": {
     "psr-4": {
-      "CT275\\App\\": "src/",
-      "CT275\\App\\Model\\": "src/models/",
-      "CT275\\App\\Controllers\\": "src/controllers"
+      "App\\": "src/",
+      "Model\\Frontend\\": "src/models/frontend",
+      "Model\\Admin\\": "src/models/admin",
+      "Controller\\Frontend\\": "src/controllers/frontend",
+      "Controller\\Admin\\": "src/controllers/admin"
     },
     "files": [
       "src/helper/functions.php",

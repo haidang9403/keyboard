@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+:root {
+    --bg-color: #0b0b0b;
+    --white-color: #fff;
+    --text-color: #f5f5f5;
+    --box-color: #171717;
+    --placeholder-color: #545454;
+    --btn-hover-color: #186dec;
+    --black-color: #000;
+    --green-color: #438333;
+    --purple-color: #8820FD;
+    --red-color: #fc2020;
+    --blue-color: #176cea;
+    --text-dark-color: #777777;
+    --img-bg-color: #313131;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+::-webkit-input-placeholder {
+    color: var(--placeholder-color) !important
+}
+
+.m-bottom-60 {
+    margin-bottom: 60px !important;
+}
+
+.m-top-60 {
+    margin-top: 60px !important;
+}
+
+.m-top-100 {
+    margin-top: 100px !important;
+}
+
+.p-top-100 {
+    padding-top: 100px !important;
+}
+
+.p-bottom-60 {
+    padding-bottom: 60px !important;
+}
+
+.badge {
+    font-size: 1.6rem;
+    font-weight: 500 !important;
+    background-color: var(--box-color);
+}
+
+.badge--popular {
+    background-color: var(--purple-color) !important;
+}
+
+.badge--discount {
+    background-color: var(--red-color) !important;
+}
+
+.badge--neworder {
+    background-color: var(--blue-color) !important;
+}
+
+.btn-black {
+    color: var(--white-color) !important;
+    background-color: var(--black-color) !important;
+}
+
+.btn-checkbox {
+    border: 1px solid var(--white-color) !important;
+    font-size: 1.6rem;
+    padding: 5px 12px;
+    color: var(--white-color) !important;
+}
+
+.btn-radio {
+    border: 1px solid var(--white-color) !important;
+    font-size: 1.6rem;
+    padding: 5px 12px;
+    color: var(--white-color) !important;
+}
+
+.btn-white {
+    font-size: 1.6rem;
+    background-color: var(--white-color);
+}
+
+.btn-white:hover {
+    background-color: var(--blue-color);
+    color: var(--white-color);
+}
+
+input[type="checkbox"]:checked+.btn-checkbox {
+    color: var(--white-color) !important;
+    background-color: var(--blue-color) !important;
+    border-color: var(--blue-color) !important;
+}
+
+input[type="radio"]:checked+.btn-radio {
+    color: var(--white-color) !important;
+    background-color: var(--blue-color) !important;
+    border-color: var(--blue-color) !important;
+}
+
+/* .btn-checkbox:hover, */
+.btn-black:hover {
+    opacity: 0.8;
+}
+
+main {
+    background-color: var(--bg-color);
+}
+
+body {
+    background-color: var(--bg-color);
+}

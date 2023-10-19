@@ -1,0 +1,5 @@
+Truyền từ index controller => view => partial
+
+19/10: Xong Home page và cơ bản CSDL
+
+20/10: Login
