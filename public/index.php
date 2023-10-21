@@ -12,4 +12,3 @@ $controllerObject = new $fullClassName(); // Tạo đối tượng controller
 
 $controllerObject->$actionName(); // Truy cập phương thức yêu cầu trả về kết quả
 
-

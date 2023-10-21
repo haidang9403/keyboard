@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
-
+@import url("https://unicons.iconscout.com/release/v2.1.9/css/unicons.css");
 :root {
     --bg-color: #0b0b0b;
     --white-color: #fff;
     --text-color: #f5f5f5;
     --box-color: #171717;
     --placeholder-color: #545454;
-    --btn-hover-color: #186dec;
+    --btn-hover-color: #102770;
     --black-color: #000;
     --green-color: #438333;
     --purple-color: #8820FD;
     --red-color: #fc2020;
-    --blue-color: #176cea;
+    --blue-color: #1768e3;
     --text-dark-color: #777777;
     --img-bg-color: #313131;
 }
@@ -130,3 +130,5 @@ main {
 body {
     background-color: var(--bg-color);
 }
+
+
