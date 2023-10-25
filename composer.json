@@ -10,16 +10,17 @@
   "autoload": {
     "psr-4": {
       "App\\": "src/",
-      "Model\\Frontend\\": "src/models/frontend",
-      "Model\\Admin\\": "src/models/admin",
-      "Controller\\Frontend\\": "src/controllers/frontend",
-      "Controller\\Admin\\": "src/controllers/admin"
+      "Model\\": "src/models/",
+      "Controller\\": "src/controllers/",
+      "DB\\": "src/db/"
     },
     "files": [
       "src/helper/functions.php",
-      "src/db/connection.php"
+      "boostrap.php"
     ]
   },
   "minimum-stability": "beta",
-  "require": {}
+  "require": {
+    "vlucas/phpdotenv": "^5.5"
+  }
 }

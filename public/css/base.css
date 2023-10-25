@@ -118,6 +118,15 @@ input[type="radio"]:checked+.btn-radio {
     border-color: var(--blue-color) !important;
 }
 
+.is-invalid~.invalid-feedback{
+    display: block;
+    text-align: start;
+}
+
+.input-icon.is-invalid {
+    color: var(--bs-form-invalid-color) !important;
+}
+
 /* .btn-checkbox:hover, */
 .btn-black:hover {
     opacity: 0.8;

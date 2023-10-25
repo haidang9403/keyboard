@@ -2,6 +2,9 @@
 partial('header',[
     'pageTitle' => $pageTitle
 ]);
+partial('heading', [
+    'infoUser' => $infoUser
+]);
 ?>
 <main>
         <div class="container">

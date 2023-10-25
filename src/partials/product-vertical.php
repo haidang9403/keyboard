@@ -15,11 +15,11 @@
     <div class="product-item d-flex flex-column">
         <div class="info d-flex justify-content-between">
             <div class="product-state">
-                <span class="badge <?=$state?> rounded text-bg-primary"><?= $textState?></span>
+                <span class="badge <?=$state?> rounded text-bg-primary"><?= htmlspecialchars($textState)?></span>
             </div>
             <div class="product-quantyti">
                  <?php 
-                    echo 'Còn lại ' . ($productInfo['quantity'] . "")
+                    echo 'Còn lại ' . htmlspecialchars(($productInfo['quantity']) . "")
                  ?>
             </div>
         </div>

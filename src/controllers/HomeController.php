@@ -1,7 +1,13 @@
 <?php
-namespace Controller\Frontend;
+namespace Controller;
+
+use Model\UserModel as User;
 
 class HomeController extends BaseController {
+
+    public function __construct(){
+        parent::__construct();
+    }
 
     public function index() {
         $productIntro = [
@@ -107,7 +113,12 @@ class HomeController extends BaseController {
             'productIntro' => $productIntro,
             'productPopulars' => $productPopulars,
             'productDiscounts' => $productDiscounts,
-            'productNews' => $productNews
+            'productNews' => $productNews,
+            'infoUser' => [
+                'id' => $this->currentUser['id'] ?? null,
+                'fullname' => $this->currentUser['fullname'] ?? null,
+                'username' => $this->currentUser['username'] ?? null
+            ]
         ]);
     }
 

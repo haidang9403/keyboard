@@ -1,4 +1,5 @@
 <?php
+// $productInfo
     if(isset($productInfo['category'])){
         $popular = "Phổ biến";
         $new = "Mới";
@@ -15,7 +16,7 @@
             <div class="product-item product-item--horizontal gap-3">
                 <div class="d-flex flex-column  w-50">
                     <div class="product-state">
-                        <span class="badge badge--discount rounded text-bg-primary">Giảm giá</span>
+                        <span class="badge badge--discount rounded text-bg-primary"><?=htmlspecialchars($textState) ?></span>
                     </div>
                     <div class="product-img">
                         <img src="../images/uploads/product-1.webp" alt="">
@@ -23,7 +24,7 @@
                 </div>
                 <div class="d-flex flex-column w-50">
                     <div class="product-quantyti">
-                        Trong kho
+                        <?php echo htmlspecialchars($productInfo['quantity']) . ' sản phẩm'?>
                     </div>
                     <div class="product-name flex-grow-1">
                         <h3 class="name mb-0">

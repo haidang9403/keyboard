@@ -1,5 +1,12 @@
 Truyền từ index controller => view => partial
 
-19/10: Xong Home page và cơ bản CSDL
+- Hôm nay:
++ Kết nói với CSDL
++ Dựng base data user
++ Tạo các hàm trong User và Session để đăng nhập
++ Đăng nhập thành công => thay đổi header theo tên đăng nhập | họ và tên trong table users
++ Tạo chức năng đăng ký
 
-20/10: Login
++ Dựng base CSDL product
++ Thay đổi item product thành thẻ a href="/product?id=<?=$product->id?>"
++ Thay đổi nội dung trang Product-detail theo id trên querystring
