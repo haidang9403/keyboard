@@ -18,8 +18,8 @@ class BaseModel extends Database{
         $columns = implode(',', $selection);
         $sql = "SELECT ${columns} FROM ${table} LIMIT ${limit}";
 
-        $statement = $connection->prepare($sql);
-        $statement = $connection->execute();
+        $statement = $this->db->prepare($sql);
+        $statement->execute();
 
         $data = [];
         while($row = $statement->fetch()){
@@ -28,12 +28,13 @@ class BaseModel extends Database{
         return $data;
     }
 
-    public function find($table, array $condition, $selection=['*']){
+    public function find($table, array $condition, $selection=['*'], $limit = 16){
         $columns = implode(',', $selection);
 
         $where = $this->string_condition($condition);
 
-        $sql = "SELECT ${columns} FROM ${table} WHERE $where";
+
+        $sql = "SELECT ${columns} FROM ${table} WHERE $where LIMIT ${limit}";
 
         $statement = $this->db->prepare($sql);
         $statement->execute();
@@ -71,14 +72,32 @@ class BaseModel extends Database{
 
     private function string_condition(array $data)
     {
-        $result = [];
+        // $result = [];
+
+        // foreach ($data as $key => $value) {
+        //     $result[] = $key . '= \'' . $value . '\'';
+        // }
+
+        //  foreach ($data as $key => $value) {
+        //     $result[] = $key . $value;
+        // }
+
+        // $result_string = implode(' and ', $result);
+
+        // return $result_string;
+        $conditions = [];
 
         foreach ($data as $key => $value) {
-            $result[] = $key . ' = \'' . $value . '\'';
+            if (is_array($value)) {
+                $operator = key($value);
+                $conditions[] = "($key " . implode(" $operator $key ", $value[$operator]) . ")";
+            } else {
+                $conditions[] = "$key $value";
+            }
         }
 
-        $result_string = implode(' and ', $result);
+        $sqlCondition = implode(' and ', $conditions);
 
-        return $result_string;
+        return $sqlCondition;
     }
 }

@@ -30,5 +30,21 @@ $actionName = ($_REQUEST['action'] ?? 'index');
 
 // Trả về kết quả
 $className = "Controller\\${controllerName}";
+
+// Kiểm tra xem controller có tồn tại không
+if (!class_exists("Controller\\${controllerName}")) {
+    NOT_FOUND();
+}
+
+// Kiểm tra xem action có tồn tại không
+if (!method_exists($className, $actionName)) {
+    NOT_FOUND();
+}
+
 $controllerObject = new $className;
-$controllerObject -> $actionName();
+
+try {
+    $controllerObject->$actionName();
+} catch (Exception $e) {
+    NOT_FOUND();
+}

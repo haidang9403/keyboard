@@ -4,7 +4,6 @@ namespace Model;
 
 class UserModel extends BaseModel {
     const TABLE = 'users';
-    public $username , $password;
 
     public function __construct(){
         parent::__construct();
@@ -15,22 +14,22 @@ class UserModel extends BaseModel {
     }
 
     public function findById($id, $selection = ['*']){
-        return $this->find(self::TABLE,['id' => $id], $selection);
+        return $this->find(self::TABLE,['id' => "= $id"], $selection);
     }
 
     public function findUsername($username, $selection = ['*']){
-        $data = $this->find(self::TABLE,['username' => $username], $selection);
+        $data = $this->find(self::TABLE,['username' => " = ${username}"], $selection);
         return !empty($data);
     }
 
     public function findUser($username, $password)
     {
-        $data = $this->find(self::TABLE,['username' => $username, 'password' => $password]);
+        $data = $this->find(self::TABLE,['username' => " = ${username}", 'password' => "= ${password}"]);
         return $data[0];
     }
 
     public function findUserById($id, $selection = ["*"]){
-        $data = $this->find(self::TABLE,['id' => $id], $selection);
+        $data = $this->find(self::TABLE,['id' => " = ${id}"], $selection);
         return $data[0];
     }
 

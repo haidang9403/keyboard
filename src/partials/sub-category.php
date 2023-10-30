@@ -1,16 +1,22 @@
 <?php
     $layout = ($layout ?? "vertical");
     $modifyCategory = 'category--' . ($modify ?? 'popular');
-    $titleCategory = isset($modify) ? 
+    $titleCategory = $title ?? (isset($modify) ? 
                     ($modify == 'popular' ? "Danh mục phổ biến" : 
                     ($modify == 'discount' ? "Danh mục khuyến mãi" : "Sản phẩm mới")) 
-                    : "Danh mục";
+                    : "Danh mục");
 ?>
 
 <div class="category <?=$modifyCategory?> m-top-100">
     <div class="title">
-        <?=$titleCategory?>
+        <?=htmlspecialchars($titleCategory)?>
     </div>
+    <?php
+    // partial('product-list', [
+    //     $layout => ($layout ?? "vertical"),
+    //     'introduce' => $introduce
+    // ]);
+    ?>
     <div class="product-list">
         <div class="row g-3">
             <?php

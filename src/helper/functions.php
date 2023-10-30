@@ -32,6 +32,12 @@ function redirect($location, array $data = [])
     exit();
 }
 
+// Lỗi 404
+function NOT_FOUND(){
+    header("HTTP/1.0 404 Not Found");
+    exit();
+}
+
 // Đọc và xóa một biến trong $_SESSION
 function session_get_once($name, $default = null)
 {

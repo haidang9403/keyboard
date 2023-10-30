@@ -6,7 +6,7 @@ use App\Session as Session;
 use Model\UserModel as User;
 
 class LoginController extends BaseController {
-    public $user;
+    public $user, $product;
     public function __construct(){
         parent::__construct();
         if(isset($this->idUser)){

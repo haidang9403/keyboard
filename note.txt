@@ -1,12 +1,25 @@
 Truyền từ index controller => view => partial
 
-- Hôm nay:
+- 25/10:
 + Kết nói với CSDL
 + Dựng base data user
 + Tạo các hàm trong User và Session để đăng nhập
 + Đăng nhập thành công => thay đổi header theo tên đăng nhập | họ và tên trong table users
 + Tạo chức năng đăng ký
+===> Đã xong
 
+- 26/10
 + Dựng base CSDL product
 + Thay đổi item product thành thẻ a href="/product?id=<?=$product->id?>"
 + Thay đổi nội dung trang Product-detail theo id trên querystring
+===> Đã xong
+
+- 27/10
++ Tìm data về keyboard 18 sản phẩm ( 6 popular, 6 new, 6 discount)
++ Trang danh mục sản phẩm
++ Phân trang
++ Filter
++ Thay đổi layout
+
+
+---- fixing breadcrumb, adding thumbnail for product details, dark/light mode, logo

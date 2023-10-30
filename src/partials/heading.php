@@ -4,9 +4,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-3">
-                        <div class="logo d-flex align-items-center">
+                        <a href="/" class="logo d-flex align-items-center">
                             <h2 class="text-uppercase mb-0">KeyBoard</h2>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-5">
                         <div class="search">
@@ -22,7 +22,7 @@
                     <div class="col-4">
                         <div class="action d-flex justify-content-around h-100">
                             <div class="cart d-flex align-items-center">
-                                <div class="account-icon">
+                                <div class="cart-icon">
                                     <i class="fa-solid fa-cart-shopping icon"></i>
                                 </div>
                                 <div class="cart-title">
@@ -47,8 +47,8 @@
                 <div class="row">
                     <div class="d-flex justify-content-between">
                         <nav class="d-flex">
-                            <a href="" class="nav-item"> <i class="fa-solid fa-house icon"></i> Trang chủ</a>
-                            |<a href="" class="nav-item"> <i class="fa-solid fa-bag-shopping icon"></i> Danh mục</a>
+                            <a href="/" class="nav-item"> <i class="fa-solid fa-house icon"></i> Trang chủ</a>
+                            |<a href="/category" class="nav-item"> <i class="fa-solid fa-bag-shopping icon"></i> Danh mục</a>
                         </nav>
                     </div>
                 </div>

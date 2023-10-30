@@ -103,8 +103,14 @@ main {
 }
 
 .product-item-wrapper {
+  display: block;
   padding: 20px;
   background-color: var(--box-color);
+  border: 1px solid var(--box-color);
+}
+
+.product-item-wrapper:hover{
+  border: 1px solid #fff ;
 }
 
 .product-item {
@@ -141,13 +147,19 @@ main {
   width: 80%;
   height: 200px;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
 .product-item .product-name .name {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--white-color);
-  height: 80px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* Số dòng bạn muốn hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product-item .product-cart .cash {
@@ -212,17 +224,12 @@ main {
 /* ---- End Service ---- */
 
 /* ---- Size ---- */
-.size {
-}
 
 .size .title {
   padding: 30px 0;
   font-size: 2.4rem;
   color: var(--white-color);
   font-weight: 500;
-}
-
-.size .size-item__img {
 }
 
 .size .size-item__text {
@@ -647,6 +654,7 @@ input[type="range"]::-moz-range-thumb {
   width: 645px;
   height: 430px;
   object-fit: cover;
+  object-position: center;
   background-color: var(--img-bg-color);
 }
 
@@ -696,6 +704,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .product-choose-quantity {
+  height: 42px;
   display: inline-block;
   margin: 0 20px;
 }

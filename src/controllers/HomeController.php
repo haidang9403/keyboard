@@ -14,7 +14,7 @@ class HomeController extends BaseController {
             'id' => 1,
             'title' => 'Ducky One 2 Mini',
             'category' => 'popular',
-            'thubnail' => './images/uploads/proudct-1.webp',
+            'thumbnail' => './images/uploads/product-1.webp',
             'quantity' => 12,
             'price' => 2800000
         ];
@@ -24,7 +24,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'popular',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ],
@@ -32,7 +32,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'popular',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ],
@@ -40,7 +40,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'popular',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ],
@@ -48,7 +48,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'popular',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ]
@@ -59,7 +59,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'discount',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ],
@@ -67,7 +67,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'discount',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ]
@@ -78,7 +78,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'new',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ],
@@ -86,7 +86,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'new',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ],
@@ -94,7 +94,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'new',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ],
@@ -102,7 +102,7 @@ class HomeController extends BaseController {
                 'id' => 1,
                 'title' => 'Ducky One 2 Mini',
                 'category' => 'new',
-                'thubnail' => './images/uploads/proudct-1.webp',
+                'thumbnail' => './images/uploads/product-1.webp',
                 'quantity' => 12,
                 'price' => 2800000
             ]
