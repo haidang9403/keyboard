@@ -61,14 +61,14 @@
                     </button>
                 </h2>
                 <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
-                    <input type="checkbox" class="btn-check " id="btn-check-state-1" autocomplete="off">
+                    <input type="checkbox" class="btn-check state-check" id="btn-check-state-1" autocomplete="off" value="popular">
                     <label class="btn btn-checkbox m-2" for="btn-check-state-1">Phổ biến</label>
         
-                    <input type="checkbox" class="btn-check" id="btn-check-state-2" autocomplete="off">
+                    <input type="checkbox" class="btn-check state-check" id="btn-check-state-2" autocomplete="off" value="new">
                     <label class="btn btn-checkbox m-2" for="btn-check-state-2">Mới</label>
         
-                    <input type="checkbox" class="btn-check" id="btn-check-state-3" autocomplete="off">
-                    <label class="btn btn-checkbox m-2" for="btn-check-state-3">Hết hàng</label>
+                    <input type="checkbox" class="btn-check state-check" id="btn-check-state-3" autocomplete="off" value="discount">
+                    <label class="btn btn-checkbox m-2" for="btn-check-state-3">Giảm giá</label>
             
                 </div>
             </div>

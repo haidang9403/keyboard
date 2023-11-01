@@ -12,8 +12,15 @@ header .header-top {
   padding: 30px 0;
 }
 
+.header-bottom.hide {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 header .header-bottom {
   padding-bottom: 30px;
+  transition: all linear 0.2s;
 }
 
 header .logo h2 {
@@ -98,6 +105,11 @@ main {
 }
 
 /* ----Product---- */
+.product-list-wrapper{
+  min-height: 500px;
+}
+
+
 .product-list {
   position: relative;
 }
@@ -129,7 +141,7 @@ main {
 }
 
 .product-item.product-item--horizontal .product-name .name {
-  padding: 16px 0;
+  margin-top: 16px
 }
 
 .product-quantyti {
@@ -167,6 +179,10 @@ main {
   font-weight: 500;
   color: var(--text-color);
   line-height: 34px;
+}
+
+.product-item.product-item--horizontal .product-cart .cash{
+  font-size: 1.8rem;
 }
 
 .product-item .product-cart .btn {
@@ -1161,3 +1177,16 @@ button,
 }
 
 /* End Login */
+
+/* Pagination */
+.pagination .page-item.disable {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.page-item{
+  cursor: pointer;
+  user-select: none;
+}
+
+/* End Pagination */

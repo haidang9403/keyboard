@@ -18,13 +18,13 @@ class UserModel extends BaseModel {
     }
 
     public function findUsername($username, $selection = ['*']){
-        $data = $this->find(self::TABLE,['username' => " = ${username}"], $selection);
+        $data = $this->find(self::TABLE,['username' => " = '${username}'"], $selection);
         return !empty($data);
     }
 
     public function findUser($username, $password)
     {
-        $data = $this->find(self::TABLE,['username' => " = ${username}", 'password' => "= ${password}"]);
+        $data = $this->find(self::TABLE,['username' => " = '${username}'", 'password' => "= '${password}'"]);
         return $data[0];
     }
 

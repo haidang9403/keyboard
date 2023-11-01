@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="product-img">
-            <img src="<?=$productInfo['thumbnail']?>" alt="">
+            <img src="<?=$productInfo['thumbnail']?>" alt="<?=$productInfo['title']?>">
         </div>
         <div class="product-name">
             <h3 class="name mb-0">
@@ -33,7 +33,7 @@
         </div>
         <div class="product-cart d-flex justify-content-between align-items-end flex-grow-1">
             <h4 class="cash mb-0">
-                <?php echo htmlspecialchars(number_format($productInfo['price'], 0, ",", ".")) . " VNĐ"?>
+                <small>₫</small><?php echo htmlspecialchars(number_format($productInfo['price'], 0, ",", "."))?>
             </h4>
             <button class="btn"><i class="fa-solid fa-cart-plus btn-icon"></i> Thêm</button>
         </div>

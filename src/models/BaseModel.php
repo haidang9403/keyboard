@@ -14,9 +14,9 @@ class BaseModel extends Database{
         $this->db = $this->connect();
     }
     
-    public function all($table, $selection = ['*'], $limit = 15){
+    public function all($table, $selection = ['*']){
         $columns = implode(',', $selection);
-        $sql = "SELECT ${columns} FROM ${table} LIMIT ${limit}";
+        $sql = "SELECT ${columns} FROM ${table}";
 
         $statement = $this->db->prepare($sql);
         $statement->execute();
@@ -28,21 +28,36 @@ class BaseModel extends Database{
         return $data;
     }
 
-    public function find($table, array $condition, $selection=['*'], $limit = 16){
+    public function find($table, array $condition, $selection=['*'], $limit = null, $offset = null, $order = null){
         $columns = implode(',', $selection);
 
         $where = $this->string_condition($condition);
 
+        $sql = "SELECT ${columns} FROM ${table}";
 
-        $sql = "SELECT ${columns} FROM ${table} WHERE $where LIMIT ${limit}";
+        if(isset($where) && !empty($where)){
+            $sql .=  " WHERE $where ";
+        }
 
+        if(isset($order)){
+            $sql .= " ORDER BY ${order} ";
+        }
+
+        if(isset($limit)){
+            $sql .= " LIMIT ${limit} ";
+        }
+
+        if(isset($offset)){
+            $sql .= " OFFSET ${offset} ";
+        }
+        
         $statement = $this->db->prepare($sql);
         $statement->execute();
-
         $data = [];
         while($row = $statement->fetch()){
             array_push($data, $row);
         }
+
         return $data;
     }
 
@@ -72,19 +87,6 @@ class BaseModel extends Database{
 
     private function string_condition(array $data)
     {
-        // $result = [];
-
-        // foreach ($data as $key => $value) {
-        //     $result[] = $key . '= \'' . $value . '\'';
-        // }
-
-        //  foreach ($data as $key => $value) {
-        //     $result[] = $key . $value;
-        // }
-
-        // $result_string = implode(' and ', $result);
-
-        // return $result_string;
         $conditions = [];
 
         foreach ($data as $key => $value) {

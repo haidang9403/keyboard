@@ -17,9 +17,10 @@ Truyền từ index controller => view => partial
 - 27/10
 + Tìm data về keyboard 18 sản phẩm ( 6 popular, 6 new, 6 discount)
 + Trang danh mục sản phẩm
-+ Phân trang
 + Filter
+=====> Đã xong
++ Phân trang
 + Thay đổi layout
-
++ Sắp xếp sản phẩm
 
 ---- fixing breadcrumb, adding thumbnail for product details, dark/light mode, logo

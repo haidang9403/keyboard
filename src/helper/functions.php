@@ -48,3 +48,40 @@ function session_get_once($name, $default = null)
     }
     return $value;
 }
+
+function pagination($total_page, $page): array
+{
+    $page_array = [];
+    if($total_page > 6){
+        if($page <= 4){
+            for($i = 1; $i <= 5; $i++){
+                $page_array[] = $i;
+            }
+            $page_array[] = '...';
+            $page_array[] = $total_page;
+        } else {
+            $end_limit = $total_page - 4;
+            if($page > $end_limit){
+                $page_array[] = 1;
+                $page_array[] = '...';
+                for($i = $end_limit; $i <= $total_page; $i++){
+                    $page_array[] = $i;
+                }
+            } else {
+                $page_array[] = 1;
+                $page_array[] = '...';
+                for($i = $page - 1; $i <= $page + 1; $i++){
+                    $page_array[] = $i;
+                }
+                $page_array[] = '...';
+                $page_array[] = $total_page;
+            }
+        }
+    } else if ($total_page > 1) {
+        for($i = 1; $i <= $total_page; $i++){
+            $page_array[] = $i;
+        }
+    }
+
+    return $page_array;
+}

@@ -86,8 +86,27 @@ $(document).ready(function () {
         isInputting = true;
     })
 
-    let sizeValues = [], size;
+    $(document).on('mouseup', () => {
+        if (isInputting) {
+            priceMax = $('.range-max').val();
+            priceMin = $('.range-min').val();
 
+            filterAjax({
+                priceMax: priceMax,
+                priceMin: priceMin,
+                size: size,
+                state: state,
+                sort: sort,
+                layout: layout
+            })
+
+            isInputting = false;
+        }
+    })
+
+
+    // Filter size
+    let sizeValues = [], size = {};
     $('.size-check').on('click', function () {
         // Lấy các giá trị của checkbox
         sizeValues = [];
@@ -97,31 +116,64 @@ $(document).ready(function () {
 
         size = JSON.stringify(sizeValues);
 
-        console.log(size)
         filterAjax({
             priceMax: priceMax,
             priceMin: priceMin,
-            size: size
+            size: size,
+            state: state,
+            sort: sort,
+            layout: layout
         })
     });
 
-    $(document).on('mouseup', () => {
-        if (isInputting) {
-            priceMax = $('.range-max').val();
-            priceMin = $('.range-min').val();
+    // Filter check
+    let stateValues = [], state = {};
+    $('.state-check').on('click', function () {
+        // Lấy các giá trị của checkbox
+        stateValues = [];
+        $('.state-check:checked').each(function () {
+            stateValues.push($(this).attr('value'));
+        });
 
-            filterAjax({
-                priceMax: priceMax,
-                priceMin: priceMin,
-                size: size
-            })
+        state = JSON.stringify(stateValues);
+        filterAjax({
+            priceMax: priceMax,
+            priceMin: priceMin,
+            size: size,
+            state: state,
+            sort: sort,
+            layout: layout
+        })
+    });
 
-            isInputting = false;
-        }
+    let sort;
+    $('.form-select').on('change', function () {
+        sort = ($(this).val()).toUpperCase();
+        filterAjax({
+            priceMax: priceMax,
+            priceMin: priceMin,
+            size: size,
+            state: state,
+            sort: sort,
+            layout: layout
+        })
+    });
+
+    let layout;
+    $('.layout-item').on("click", function () {
+        $('.layout-item').removeClass('active');
+        $(this).addClass('active');
+        layout = ($(this).attr("value"));
+        console.log(layout);
+        filterAjax({
+            priceMax: priceMax,
+            priceMin: priceMin,
+            size: size,
+            state: state,
+            sort: sort,
+            layout: layout
+        })
     })
-
-
-    // Filter size
 
     // Ajax function to filter
     function filterAjax(data) {
@@ -138,4 +190,22 @@ $(document).ready(function () {
             }
         })
     }
+
+    var lastScrollTop = 0;
+    var headerBottomHeight = $('.header-bottom').outerHeight();
+
+    $(window).scroll(function (event) {
+        var st = $(this).scrollTop();
+
+        if (st > lastScrollTop && st > headerBottomHeight) {
+            $('.header-bottom').addClass('hide');
+            console.log(st)
+        } else {
+            if (st + $(window).height() >= headerBottomHeight) {
+                $('.header-bottom').removeClass('hide');
+            }
+        }
+
+        lastScrollTop = st;
+    });
 })

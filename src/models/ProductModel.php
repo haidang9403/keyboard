@@ -8,13 +8,14 @@ class ProductModel extends BaseModel {
         parent::__construct();
     }
 
-    public function getAll($selection = ['*'], $limit = 15){
-        return $this->all(self::TABLE, $selection, $limit);
+    public function getAll($selection = ['*']){
+        return $this->all(self::TABLE, $selection);
     }
 
-    public function getProduct($condition, $selection=['*']){
-        return $this->find(self::TABLE, $condition, $selection);
+    public function get($condition, $selection=['*'], $limit = null, $offset = null, $order = null){
+        return $this->find(self::TABLE, $condition, $selection, $limit, $offset, $order);
     }
+
 
     public function getProductById($id, $selection = ['*']){
         $data = $this->find(self::TABLE, ['id' => " = ${id}"], $selection);

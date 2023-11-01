@@ -16,10 +16,10 @@
             <div class="product-item product-item--horizontal gap-3">
                 <div class="d-flex flex-column  w-50">
                     <div class="product-state">
-                        <span class="badge badge--discount rounded text-bg-primary"><?=htmlspecialchars($textState) ?></span>
+                        <span class="badge <?=$state?> rounded text-bg-primary"><?=htmlspecialchars($textState) ?></span>
                     </div>
                     <div class="product-img">
-                        <img src="../images/uploads/product-1.webp" alt="">
+                        <img src="<?=$productInfo['thumbnail']?>" alt="<?=$productInfo['title']?>">
                     </div>
                 </div>
                 <div class="d-flex flex-column w-50">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="product-cart d-flex justify-content-between">
                         <h4 class="cash mb-0">
-                            <?php echo htmlspecialchars(number_format($productInfo['price'], 0, ",", ".")) . " VNĐ"?>
+                            <small>₫</small><?php echo htmlspecialchars(number_format($productInfo['price'], 0, ",", "."))?>
                         </h4>
                         <button class="btn"><i class="fa-solid fa-cart-plus btn-icon"></i> Thêm</button>
                     </div>

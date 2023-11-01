@@ -6,6 +6,7 @@ use Model\ProductModel as Product;
 
 class CategoryController extends BaseController {
     public $product;
+    const LIMIT = 15;
 
     public function __construct(){
         parent::__construct();
@@ -13,56 +14,22 @@ class CategoryController extends BaseController {
     }
 
     public function index(){
+        // Reset filter
+        $_SESSION['condition'] = null;
+        $_SESSION['sort'] = null;
+        $_SESSION['layout'] = null;
 
-        // $productInfo = [
-        //     'id' => 1,
-        //     'title' => 'Ducky One 2 Mini',
-        //     'category' => 'popular',
-        //     'thubnail' => './images/uploads/proudct-1.webp',
-        //     'quantity' => 12,
-        //     'price' => 2800000,
-        //     'layout' => '68%',
-        //     'led' => 'RGB',
-        //     'switch' => 'AKKO CS Switch Jelly Pink',
-        //     'connect' => 'USB Type Cs, Bluetooth 5.0, Wireless 2.4Ghz'
-        // ];
+        $allProduct = $this->product->getAll();
+        $total_product = count($allProduct);
+        $limit = self::LIMIT;
+        $current_page = 1;
+        $total_page = ceil( $total_product/$limit);
+        $offset = ($current_page - 1)*$limit;
 
-        //  $productOffers = [
-        //                  [
-        //         'id' => 1,
-        //         'title' => 'Ducky One 2 Mini',
-        //         'category' => 'new',
-        //         'thubnail' => './images/uploads/proudct-1.webp',
-        //         'quantity' => 12,
-        //         'price' => 2800000
-        //     ],
-        //     [
-        //         'id' => 1,
-        //         'title' => 'Ducky One 2 Mini',
-        //         'category' => 'new',
-        //         'thubnail' => './images/uploads/proudct-1.webp',
-        //         'quantity' => 12,
-        //         'price' => 2800000
-        //     ],
-        //      [
-        //         'id' => 1,
-        //         'title' => 'Ducky One 2 Mini',
-        //         'category' => 'new',
-        //         'thubnail' => './images/uploads/proudct-1.webp',
-        //         'quantity' => 12,
-        //         'price' => 2800000
-        //     ],
-        //     [
-        //         'id' => 1,
-        //         'title' => 'Ducky One 2 Mini',
-        //         'category' => 'new',
-        //         'thubnail' => './images/uploads/proudct-1.webp',
-        //         'quantity' => 12,
-        //         'price' => 2800000
-        //     ]
-        // ];
 
-        $allProduct =  $this->product->getAll();
+        $page_array = pagination($total_page, $current_page);
+
+        $products = $this->product->get([],["*"],$limit, $offset);
 
         return $this->view('frontend.category.index',[
             'infoUser' => [
@@ -70,12 +37,38 @@ class CategoryController extends BaseController {
                 'fullname' => $this->currentUser['fullname'] ?? null,
                 'username' => $this->currentUser['username'] ?? null
             ],
-            'products' => $allProduct
+            'products' => $products,
+            'page_array' => $page_array,
+            'current_page' => $current_page
         ]);
     }
 
+    public function paginate(){
+        $condition = $_SESSION['condition'] ?? []; // Lấy filter từ sesion
+        $order = $_SESSION['sort'] ?? null;
+        $layout = $_SESSION['layout'] ?? null;
+        $limit_layout = $layout == 'horizontal' ? self::LIMIT + 1 : self::LIMIT;
+        $allProduct = $this->product->get($condition);
+        $total_product = count($allProduct);
+        $limit = $limit_layout;
+        $current_page = $_POST['page'] ?? 1;
+        $total_page = ceil( $total_product/$limit);
+        $offset = ($current_page - 1)*$limit;
+
+
+        $page_array = pagination($total_page, $current_page);
+
+        $products = $this->product->get($condition,["*"],$limit, $offset, $order);
+        echo  partial("product-list",[
+                    'products' => $products,
+                    'layout' => $layout,
+                    'page_array' => $page_array,
+                    'current_page' => $current_page
+                ]);
+    }
+
     public function filter(){
-        $condition = [];
+        $condition = []; $order = null; $layout = null;
 
         if ($priceMax = $_POST['priceMax'] ?? null) {
             $condition['price']['and'][] = '<= '.$priceMax;
@@ -96,10 +89,47 @@ class CategoryController extends BaseController {
             }
         }
 
-        $products = $this->product->getProduct($condition);
+        if($stateJSON = $_POST['state'] ?? []){
+            $states = json_decode($stateJSON, true);
+            if(empty($states)){
+                $condition['category'] = "LIKE '%'";
+            }else{
+                foreach ($states as $state) {
+                    $condition['category']['or'][] = "= '$state'";
+                }
+            }
+        }
+
+        if($sort = $_POST['sort'] ?? null){
+            if($sort != 'NONE'){
+                $order = " price " . $sort;
+            } else {
+                $order = null;
+            }
+        }
+
+        $layout = $_POST['layout'] ?? null;
+        $limit_layout = $layout == 'horizontal' ? self::LIMIT + 1 : self::LIMIT;
+
+        $allProduct = $this->product->get($condition,["*"]);
+        $total_product = count($allProduct);
+        $limit = $limit_layout;
+        $current_page = $_POST['page'] ?? 1;
+        $total_page = ceil( $total_product/$limit);
+        $offset = ($current_page - 1)*$limit;
+
+
+        $page_array = pagination($total_page, $current_page);
+
+        $products = $this->product->get($condition,["*"],$limit, $offset, $order);
+        $_SESSION['condition'] = $condition;
+        $_SESSION['sort'] = $order;
+        $_SESSION['layout'] = $layout;
         echo  partial("product-list",[
                     'products' => $products,
-                    'layout' => 'vertical'
+                    'layout' => $layout,
+                    'page_array' => $page_array,
+                    'current_page' => $current_page
                 ]);
     }
 }
