@@ -21,14 +21,17 @@
                     </div>
                     <div class="col-4">
                         <div class="action d-flex justify-content-around h-100">
-                            <div class="cart d-flex align-items-center">
+                            <a href="<?= isset($infoUser['id']) ? "/cart" : "#" ?>" class="cart d-flex align-items-center">
                                 <div class="cart-icon">
                                     <i class="fa-solid fa-cart-shopping icon"></i>
+                                    <?php if(isset($infoUser['id'])): ?>
+                                    <div class="num-product"><?=htmlspecialchars($infoUser['num_product'])?></div>
+                                    <?php endif ?>
                                 </div>
                                 <div class="cart-title">
                                     <h3 class="title mb-0">Giỏ hàng</h3>
                                 </div>
-                            </div>
+                            </a>
                             <a href="<?= isset($infoUser['id']) ? "#" : "/login" ?>" class="account d-flex align-items-center">
                                 <div class="account-icon">
                                     <i class="fa-solid fa-user icon"></i>

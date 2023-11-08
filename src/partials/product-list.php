@@ -51,29 +51,52 @@
     <script>
         // Pagition
         $(document).ready(function() {
+            let URL_PAGINATE = '/category?action=paginate';
             $(".page-link").on("click", function (e) {
                 e.preventDefault();
                 var page = $(this).attr("page");
-                callback({
+                callback(URL_PAGINATE,{
                     page: page
-                });
+                }, renderProductList);
             });
+
+            function renderProductList(response){
+                $('.product-list-wrapper').html(response);
+            }
+
+
+            // Add cart
+
+            let URL_ADD_CART = '/cart?action=add';
+            let dataCart = {};
+
+            $('.product-cart button').on("click", function (e) {
+                e.preventDefault();
+                let idProduct = $(this).data('id');
+                
+                dataCart.idProduct = idProduct;
+
+                callback(URL_ADD_CART, dataCart, renderCart);
+            });
+
+            function renderCart(response) {
+                 $('.cart .num-product').html(response);
+            }
+
+            function callback(url,data,success) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: data,
+                    success: success,
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                })
+            }
         });
 
-        function callback(data) {
-            $.ajax({
-                url: '/category?action=paginate',
-                type: 'POST',
-                data: data,
-                success: function (response) {
-                    // Xử lý dữ liệu nhận được từ AJAX response
-                    $('.product-list-wrapper').html(response);
-                },
-                error: function (error) {
-                    console.error('Error:', error);
-                }
-            })
-        }
+
     </script>
     <?php endif ?>
 </div>

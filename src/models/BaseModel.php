@@ -28,7 +28,8 @@ class BaseModel extends Database{
         return $data;
     }
 
-    public function find($table, array $condition, $selection=['*'], $limit = null, $offset = null, $order = null){
+    public function find($table, array $condition, array $values, $selection=['*'], $limit = null, $offset = null, $order = null){
+        
         $columns = implode(',', $selection);
 
         $where = $this->string_condition($condition);
@@ -40,21 +41,35 @@ class BaseModel extends Database{
         }
 
         if(isset($order)){
-            $sql .= " ORDER BY ${order} ";
+            $order = str_replace(';', '', $order);
+            $sql .= " ORDER BY $order ";
         }
 
         if(isset($limit)){
-            $sql .= " LIMIT ${limit} ";
+            $sql .= " LIMIT :limit ";
+            $values[':limit'] = $limit;
         }
 
         if(isset($offset)){
-            $sql .= " OFFSET ${offset} ";
+            $sql .= " OFFSET :offset ";
+            $values[':offset'] = $offset;
         }
         
+        
+
         $statement = $this->db->prepare($sql);
+
+        foreach($values as $key => $value){
+            if(is_int($value)){
+                $statement->bindValue($key, $value, PDO::PARAM_INT);
+            }else {
+                $statement->bindValue($key, $value);
+            }
+        }
+
         $statement->execute();
         $data = [];
-        while($row = $statement->fetch()){
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
             array_push($data, $row);
         }
 
@@ -63,25 +78,133 @@ class BaseModel extends Database{
 
     public function save($table, array $data){
         $keys = array_keys($data);
-        $keysString =implode(", ", $keys);
-
-        $values = [];
-        foreach ($data as $value) {
-            $values[] = is_string($value) ? "'$value'" : $value;
+        $keysString = implode(", ", $keys);
+        // Tạo mảng mới chứa các tham số
+        $parameters = [];
+        foreach ($keys as $value) {
+            $parameters[] = ":$value";
         }
 
-        $valuesString = implode(', ', $values);
-        $sql = "INSERT INTO ${table} (${keysString}) VALUES (${valuesString})";
+        // Biến mảng thành chuỗi bằng cách nối các phần tử với dấu phẩy và dấu cách
+        $resultParam = '(' . implode(', ', $parameters) . ')';
+
+        $values = [];
+        foreach ($data as $key => $value) {
+            $values["$key"] = $value;
+        }
+
+        $sql = "INSERT INTO ${table} (${keysString}) VALUES  $resultParam";
         $statement = $this->db->prepare($sql);
+
+        foreach($values as $key => $value){
+            if(is_int($value)){
+                $statement->bindValue($key, $value, PDO::PARAM_INT);
+            }else {
+                $statement->bindValue($key, $value);
+            }
+        }
+
         $statement->execute();
         
     }
 
-    public function update(){
+    public function join($table, $data, $condition, $valueCondition, $selection = ["*"]){
+        // selection
+        $columns = implode(',', $selection);
+        
+        $joinArray = [];
+
+        foreach ($data as $table_join => $keys) {
+            $joinArray[] = "JOIN $table_join ON $table.{$keys[1]} = $table_join.{$keys[0]}";
+        }
+
+        $join = implode(' ', $joinArray);
+
+        // Where
+        $where = $this->string_condition($condition);
+
+        $sql = "SELECT $columns FROM $table $join WHERE $where";
+
+        $statement = $this->db->prepare($sql);
+
+        foreach($valueCondition as $key => $value){
+            if(is_int($value)){
+                $statement->bindValue($key, $value, PDO::PARAM_INT);
+            }else {
+                $statement->bindValue($key, $value);
+            }
+        }
+
+        $statement->execute();
+
+        $data = [];
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+            array_push($data, $row);
+        }
+
+        return $data;
+
 
     }
 
-    public function delete(){
+    public function update($table, $data, $condition, $valueCondition){
+        /// SET
+        // Tạo mảng mới dạng id = :id,....
+        $keys = array_keys($data);
+        $parameters = [];
+        foreach ($keys as $key) {
+            $parameters[] = " $key = :$key ";
+        }
+
+        // Biến mảng thành chuỗi bằng cách nối các phần tử với dấu phẩy và dấu cách
+        $set = implode(', ', $parameters);
+
+        // WHERE
+        $where = $this->string_condition($condition);
+
+        $sql = "UPDATE $table SET $set WHERE $where";
+
+        $statement = $this->db->prepare($sql);
+
+        foreach($valueCondition as $key => $value){
+            if(is_int($value)){
+                $statement->bindValue($key, $value, PDO::PARAM_INT);
+            }else {
+                $statement->bindValue($key, $value);
+            }
+        }
+
+        foreach($data as $key => $value){
+            if(is_int($value)){
+                $statement->bindValue($key, $value, PDO::PARAM_INT);
+            }else {
+                $statement->bindValue($key, $value);
+            }
+        }
+
+        
+
+        $statement->execute();
+
+    }
+
+    public function delete($table, $condition, $valueCondition){
+        // WHERE
+        $where = $this->string_condition($condition);
+
+        $sql = "DELETE FROM $table WHERE $where";
+
+        $statement = $this->db->prepare($sql);
+
+        foreach($valueCondition as $key => $value){
+            if(is_int($value)){
+                $statement->bindValue($key, $value, PDO::PARAM_INT);
+            }else {
+                $statement->bindValue($key, $value);
+            }
+        }
+
+        $statement->execute();
 
     }
 

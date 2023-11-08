@@ -82,13 +82,16 @@ partial('heading', [
                                                 <i class="bi bi-plus"></i>
                                             </div>
                                         </div>
-                                    <button class="btn"><i class="fa-solid fa-cart-plus btn-icon"></i> Thêm</button>
+                                    <button data-id="<?= $productInfo['id'] ?>" class="btn"><i class="fa-solid fa-cart-plus btn-icon"></i> Thêm</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        <script>
+
+     </script>
             <?php
                 partial('sub-category',[
                     'products' => $productOffers,

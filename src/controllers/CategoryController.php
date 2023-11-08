@@ -16,6 +16,7 @@ class CategoryController extends BaseController {
     public function index(){
         // Reset filter
         $_SESSION['condition'] = null;
+        $_SESSION['value'] = null;
         $_SESSION['sort'] = null;
         $_SESSION['layout'] = null;
 
@@ -29,14 +30,10 @@ class CategoryController extends BaseController {
 
         $page_array = pagination($total_page, $current_page);
 
-        $products = $this->product->get([],["*"],$limit, $offset);
+        $products = $this->product->get([],[],["*"],$limit, $offset);
 
         return $this->view('frontend.category.index',[
-            'infoUser' => [
-                'id' => $this->currentUser['id'] ?? null,
-                'fullname' => $this->currentUser['fullname'] ?? null,
-                'username' => $this->currentUser['username'] ?? null
-            ],
+            'infoUser' => $this->infoUser,
             'products' => $products,
             'page_array' => $page_array,
             'current_page' => $current_page
@@ -47,8 +44,9 @@ class CategoryController extends BaseController {
         $condition = $_SESSION['condition'] ?? []; // Lấy filter từ sesion
         $order = $_SESSION['sort'] ?? null;
         $layout = $_SESSION['layout'] ?? null;
+        $value = $_SESSION['value'] ?? [];
         $limit_layout = $layout == 'horizontal' ? self::LIMIT + 1 : self::LIMIT;
-        $allProduct = $this->product->get($condition);
+        $allProduct = $this->product->get($condition, $value);
         $total_product = count($allProduct);
         $limit = $limit_layout;
         $current_page = $_POST['page'] ?? 1;
@@ -58,7 +56,7 @@ class CategoryController extends BaseController {
 
         $page_array = pagination($total_page, $current_page);
 
-        $products = $this->product->get($condition,["*"],$limit, $offset, $order);
+        $products = $this->product->get($condition, $value ,["*"],$limit, $offset, $order);
         echo  partial("product-list",[
                     'products' => $products,
                     'layout' => $layout,
@@ -69,22 +67,28 @@ class CategoryController extends BaseController {
 
     public function filter(){
         $condition = []; $order = null; $layout = null;
-
+        $value = []; // Lưu giá trị cho câu truy vấn
         if ($priceMax = $_POST['priceMax'] ?? null) {
-            $condition['price']['and'][] = '<= '.$priceMax;
+            $condition['price']['and'][] = ' <= :priceMax ';
+            $value['priceMax'] = $priceMax;
         }
 
         if ($priceMin = $_POST['priceMin'] ?? null) {
-            $condition['price']['and'][] = '>= '.$priceMin;
+            $condition['price']['and'][] = ' >= :priceMin ';
+            $value['priceMin'] = $priceMin;
         }
 
         if($sizeJSON = $_POST['size'] ?? []){
             $sizes = json_decode($sizeJSON, true);
             if(empty($sizes)){
-                $condition['layout'] = "LIKE '%'";
+                $condition['layout'] = " LIKE :allLayout ";
+                $value['allLayout'] = '%';
             }else{
+                $i = 0;
                 foreach ($sizes as $size) {
-                    $condition['layout']['or'][] = "LIKE '$size'";
+                    $condition['layout']['or'][] = " LIKE :size${i} ";
+                    $value["size${i}"] = $size;
+                    $i++;
                 }
             }
         }
@@ -92,10 +96,14 @@ class CategoryController extends BaseController {
         if($stateJSON = $_POST['state'] ?? []){
             $states = json_decode($stateJSON, true);
             if(empty($states)){
-                $condition['category'] = "LIKE '%'";
+                $condition['category'] = " LIKE :allCategory ";
+                $value['allCategory'] = "%";
             }else{
+                $i = 0;
                 foreach ($states as $state) {
-                    $condition['category']['or'][] = "= '$state'";
+                    $condition['category']['or'][] = "= :state$i ";
+                    $value["state$i"] = $state;
+                    $i++;
                 }
             }
         }
@@ -107,11 +115,12 @@ class CategoryController extends BaseController {
                 $order = null;
             }
         }
-
+        
         $layout = $_POST['layout'] ?? null;
         $limit_layout = $layout == 'horizontal' ? self::LIMIT + 1 : self::LIMIT;
 
-        $allProduct = $this->product->get($condition,["*"]);
+
+        $allProduct = $this->product->get($condition,$value,["*"]);
         $total_product = count($allProduct);
         $limit = $limit_layout;
         $current_page = $_POST['page'] ?? 1;
@@ -121,10 +130,11 @@ class CategoryController extends BaseController {
 
         $page_array = pagination($total_page, $current_page);
 
-        $products = $this->product->get($condition,["*"],$limit, $offset, $order);
+        $products = $this->product->get($condition,$value,["*"],$limit, $offset, $order);
         $_SESSION['condition'] = $condition;
         $_SESSION['sort'] = $order;
         $_SESSION['layout'] = $layout;
+        $_SESSION['value'] = $value;
         echo  partial("product-list",[
                     'products' => $products,
                     'layout' => $layout,

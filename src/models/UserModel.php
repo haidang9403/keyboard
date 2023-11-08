@@ -14,22 +14,22 @@ class UserModel extends BaseModel {
     }
 
     public function findById($id, $selection = ['*']){
-        return $this->find(self::TABLE,['id' => "= $id"], $selection);
+        return $this->find(self::TABLE,['id' => " = :id "],['id' => $id], $selection);
     }
 
     public function findUsername($username, $selection = ['*']){
-        $data = $this->find(self::TABLE,['username' => " = '${username}'"], $selection);
+        $data = $this->find(self::TABLE,['username' => " = :username "],['username' => $username] , $selection);
         return !empty($data);
     }
 
     public function findUser($username, $password)
     {
-        $data = $this->find(self::TABLE,['username' => " = '${username}'", 'password' => "= '${password}'"]);
+        $data = $this->find(self::TABLE,['username' => " = :username ", 'password' => "= :password "],['username' => $username, 'password' => $password]);
         return $data[0];
     }
 
     public function findUserById($id, $selection = ["*"]){
-        $data = $this->find(self::TABLE,['id' => " = ${id}"], $selection);
+        $data = $this->find(self::TABLE,['id' => " = :id "], ['id' => $id], $selection);
         return $data[0];
     }
 
@@ -56,11 +56,11 @@ class UserModel extends BaseModel {
         return $this->save(self::TABLE, $data);
     }
 
-    public function update(){
+    // public function update(){
 
-    }
+    // }
 
-    public function delete(){
+    // public function delete(){
 
-    }
+    // }
 }

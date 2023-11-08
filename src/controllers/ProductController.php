@@ -64,7 +64,7 @@ class ProductController extends BaseController {
 
         $productId = $_GET['id'] ?? []; 
         if(!empty($productId)){
-            $productInfo = $this->product->getProductById(intval($productId));
+            $productInfo = $this->product->getById(intval($productId));
             if(empty($productInfo)){
                 NOT_FOUND();
             }else{
@@ -79,12 +79,8 @@ class ProductController extends BaseController {
         }
 
         return $this->view('frontend.product.index',[
+            'infoUser' => $this->infoUser,
             'productInfo' => $productInfo,
-            'infoUser' => [
-                'id' => $this->currentUser['id'] ?? null,
-                'fullname' => $this->currentUser['fullname'] ?? null,
-                'username' => $this->currentUser['username'] ?? null
-            ],
             'productOffers' => $productOffers
         ]);
     }

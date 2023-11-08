@@ -106,6 +106,10 @@ ul {
     color: var(--white-color);
 }
 
+.btn.disabled{
+    background-color: var(--white-color);
+}
+
 input[type="checkbox"]:checked+.btn-checkbox {
     color: var(--white-color) !important;
     background-color: var(--blue-color) !important;

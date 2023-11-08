@@ -35,7 +35,7 @@
             <h4 class="cash mb-0">
                 <small>₫</small><?php echo htmlspecialchars(number_format($productInfo['price'], 0, ",", "."))?>
             </h4>
-            <button class="btn"><i class="fa-solid fa-cart-plus btn-icon"></i> Thêm</button>
+            <button data-id="<?=$productInfo['id']?>" class="btn add-cart"><i class="fa-solid fa-cart-plus btn-icon"></i> Thêm</button>
         </div>
     </div>
 </a>

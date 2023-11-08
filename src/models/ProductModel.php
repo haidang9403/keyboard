@@ -12,18 +12,22 @@ class ProductModel extends BaseModel {
         return $this->all(self::TABLE, $selection);
     }
 
-    public function get($condition, $selection=['*'], $limit = null, $offset = null, $order = null){
-        return $this->find(self::TABLE, $condition, $selection, $limit, $offset, $order);
+    public function get($condition, $value, $selection=['*'], $limit = null, $offset = null, $order = null){
+        return $this->find(self::TABLE, $condition, $value, $selection, $limit, $offset, $order);
     }
 
 
-    public function getProductById($id, $selection = ['*']){
-        $data = $this->find(self::TABLE, ['id' => " = ${id}"], $selection);
+    public function getById($id, $selection = ['*']){
+        $data = $this->find(self::TABLE, ['id' => " = :id "],['id' => $id], $selection);
         return $data[0] ?? [];
     }
 
     public function getProductByCategory($category, $selection = ['*'], $limit = 16){
-        return 0;
+        return $data = $this->find(self::TABLE, ['category' => " = :category "],['category' => $category], $selection, $limit);
+    }
+
+    public function set($data, $condition, $valueCondition){
+        return $this->update(self::TABLE,$data, $condition, $valueCondition);
     }
 
     public function getProductOffers(){

@@ -18,9 +18,76 @@ Truyền từ index controller => view => partial
 + Tìm data về keyboard 18 sản phẩm ( 6 popular, 6 new, 6 discount)
 + Trang danh mục sản phẩm
 + Filter
-=====> Đã xong
 + Phân trang
 + Thay đổi layout
 + Sắp xếp sản phẩm
+==> Đã xong
 
+- 2/11-5/11
++ Trang giỏ hàng
++ Thanh toán
++ Thông tin người dùng ( đăng xuất, thông tin, đơn hàng)
+
+
+-- 6/11 - 11/11
+Còn admin
 ---- fixing breadcrumb, adding thumbnail for product details, dark/light mode, logo
+
+Thêm vào giỏ hàng
+Khi thêm vào giỏ hàng => Gọi 1 ajax giỏ hàng
+------ Nếu có user
+Tìm trong bảng order theo id user và state = 0 ( có giỏ hàng nhưng chưa thanh toán)
+    ---- Nếu có order thì lấy id order
+        --- tìm trong bảng detail order xem có id order không
+            ---- Nếu có id order
+                --- Thì tìm tiếp xem có id product hay không
+                    ---- Có thì tăng số lượng sản phẩm lên 1
+                    ---- Không thì sẽ tạo thêm 1 order details
+            ---- Nếu chưa có id order 
+                + Tạo một bảng order detail
+    ---- Nếu chưa có order thì tạo một order và order details tham chiếu đến id order và id product
+------ Không user
+Phải đăng nhập
+
+
+header giỏ hàng tìm trong bảng order connect với order detail với id user xem có bao nhiêu sản phẩm
+==> render ra màn hình
+
+Trang giỏ hàng chi tiết => Lấy từng sản phẩm ra và render ra màn hình state order = 0
+
++ Thanh toán
+---- Ấn nút thanh toán
+    --- Nếu thông tin hợp lệ, nhập đầy đủ địa chỉ, sdt, họ tên người nhận, chọn phương thức thanh toán,...
+    --- chuyển state = 1;
+
+
+sql
+CREATE TABLE `orders`(
+    id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    fullname varchar(50) NOT NULL,
+    phone_number varchar(20) NOT NULL,
+    address varchar(200) NOT NULL,
+    note varchar(100),
+    status INT NOT NULL DEFAULT 0,
+    total_money INT,
+    order_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB;
+
+CREATE TABLE `order_details`(
+    id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    price INT NOT NULL,
+    num INT NOT NULL,
+    total_money INT NOT NULL
+)ENGINE=InnoDB;
+
+ALTER TABLE order_details 
+ADD FOREIGN KEY (order_id) REFERENCES orders(id);
+
+ALTER TABLE order_details 
+ADD FOREIGN KEY (product_id) REFERENCES products(id);
+
+ALTER TABLE orders
+ADD FOREIGN KEY (user_id) REFERENCES users(id);

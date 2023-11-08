@@ -51,7 +51,8 @@ class RegisterController extends BaseController {
         $this->user->store([
             'fullname' => $fullname,
             'username' => $data['signup-username'],
-            'password' => $data['signup-password']
+            'password' => $data['signup-password'],
+            'role' => 'user'
             // 'password' => password_hash($data['signup-password'], PASSWORD_DEFAULT)
         ]);
         Session::login($data['signup-username'],$data['signup-password']);

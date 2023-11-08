@@ -2,11 +2,14 @@
 namespace Controller;
 
 use Model\UserModel as User;
+use Model\ProductModel as Product;
 
 class HomeController extends BaseController {
+    private $product;
 
     public function __construct(){
         parent::__construct();
+        $this->product = new Product;
     }
 
     public function index() {
@@ -114,11 +117,7 @@ class HomeController extends BaseController {
             'productPopulars' => $productPopulars,
             'productDiscounts' => $productDiscounts,
             'productNews' => $productNews,
-            'infoUser' => [
-                'id' => $this->currentUser['id'] ?? null,
-                'fullname' => $this->currentUser['fullname'] ?? null,
-                'username' => $this->currentUser['username'] ?? null
-            ]
+            'infoUser' => $this->infoUser
         ]);
     }
 

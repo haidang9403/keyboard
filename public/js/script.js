@@ -24,7 +24,7 @@ $(document).ready(function () {
     // $(".login.section").mouseup(function (e) {
     //     if (e.button == 0) { // Nếu là chuột trái
     //         console.log()
-    //         var container = $(".login.section");
+    //         let container = $(".login.section");
     //         if (!$(".label-log").is(e.target) && !$(".label-reg").is(e.target) && !$(".reg-log").is(e.target)
     //             && !$(".card-3d-wrap").is(e.target) && !$(".card-3d-wrap *").is(e.target)) {
     //             $(".login .checkbox").prop("checked", false)
@@ -75,6 +75,8 @@ $(document).ready(function () {
     });
 
     // Filter price
+    let URL_FILTER = '/category?action=filter';
+    let dataFilter = {}; // Lưu dữ liệu filter dạng oject
     let isInputting = false;
 
     let priceMin, priceMax;
@@ -91,14 +93,10 @@ $(document).ready(function () {
             priceMax = $('.range-max').val();
             priceMin = $('.range-min').val();
 
-            filterAjax({
-                priceMax: priceMax,
-                priceMin: priceMin,
-                size: size,
-                state: state,
-                sort: sort,
-                layout: layout
-            })
+            dataFilter.priceMax = priceMax;
+            dataFilter.priceMin = priceMin;
+
+            ajax(URL_FILTER, dataFilter, renderProduct);
 
             isInputting = false;
         }
@@ -116,14 +114,9 @@ $(document).ready(function () {
 
         size = JSON.stringify(sizeValues);
 
-        filterAjax({
-            priceMax: priceMax,
-            priceMin: priceMin,
-            size: size,
-            state: state,
-            sort: sort,
-            layout: layout
-        })
+        dataFilter.size = size;
+
+        ajax(URL_FILTER, dataFilter, renderProduct);
     });
 
     // Filter check
@@ -136,27 +129,17 @@ $(document).ready(function () {
         });
 
         state = JSON.stringify(stateValues);
-        filterAjax({
-            priceMax: priceMax,
-            priceMin: priceMin,
-            size: size,
-            state: state,
-            sort: sort,
-            layout: layout
-        })
+        dataFilter.state = state;
+
+        ajax(URL_FILTER, dataFilter, renderProduct);
     });
 
     let sort;
     $('.form-select').on('change', function () {
         sort = ($(this).val()).toUpperCase();
-        filterAjax({
-            priceMax: priceMax,
-            priceMin: priceMin,
-            size: size,
-            state: state,
-            sort: sort,
-            layout: layout
-        })
+        dataFilter.sort = sort;
+
+        ajax(URL_FILTER, dataFilter, renderProduct);
     });
 
     let layout;
@@ -164,26 +147,46 @@ $(document).ready(function () {
         $('.layout-item').removeClass('active');
         $(this).addClass('active');
         layout = ($(this).attr("value"));
-        console.log(layout);
-        filterAjax({
-            priceMax: priceMax,
-            priceMin: priceMin,
-            size: size,
-            state: state,
-            sort: sort,
-            layout: layout
-        })
-    })
 
-    // Ajax function to filter
-    function filterAjax(data) {
+        dataFilter.layout = layout;
+
+        ajax(URL_FILTER, dataFilter, renderProduct);
+    });
+
+    // Function success filter
+    function renderProduct(response) {
+        $('.product-list-wrapper').html(response);
+    }
+
+    // Add product in page product details
+    let URL_ADD_CART = '/cart?action=add';
+
+
+    $('.product-detail__info .product-cart button').on("click", function (e) {
+        e.preventDefault();
+        let dataCart = {};
+        let idProduct = $(this).data('id');
+        let quantity = parseInt($('.product-cart .quantity-number').text());
+
+        dataCart.idProduct = idProduct;
+        dataCart.numProduct = quantity;
+
+        ajax(URL_ADD_CART, dataCart, renderCartNumber);
+    });
+
+    function renderCartNumber(response) {
+        $('.cart .num-product').html(response);
+    }
+
+    // Ajax
+    function ajax(url, data, success) {
         $.ajax({
-            url: '/category?action=filter',
+            url: url,
             type: 'POST',
             data: data,
             success: function (response) {
                 // Xử lý dữ liệu nhận được từ AJAX response
-                $('.product-list-wrapper').html(response);
+                success(response);
             },
             error: function (error) {
                 console.error('Error:', error);
@@ -191,15 +194,45 @@ $(document).ready(function () {
         })
     }
 
-    var lastScrollTop = 0;
-    var headerBottomHeight = $('.header-bottom').outerHeight();
+    ////// Increase - Decrease number product
+    $('.product-detail__info .quantity-increase').on("click", function () {
+        let quantityElement = $(this).siblings('.quantity-number');
+        let currentQuantity = parseInt(quantityElement.text());
+        quantityElement.text(currentQuantity + 1);
+    });
+
+    $('.product-detail__info .quantity-decrease').on("click", function () {
+        let quantityElement = $(this).siblings('.quantity-number');
+        let currentQuantity = parseInt(quantityElement.text());
+        if (currentQuantity > 1) {
+            quantityElement.text(currentQuantity - 1);
+        }
+    });
+
+    //// Method Delivery
+    $('input[name=fees]').change(function () {
+        var fee = $('input[name=fees]:checked').val();
+
+        ajax('/cart?action=charge', { fee: fee }, renderPay);
+    });
+
+    function renderPay(jsonData) {
+        let data = $.parseJSON(jsonData);
+        $('.fee-delivery .value').html(data.fee);
+        $('.total-price-cart .value').html(data.totalPay);
+        $('.total-price-cart input').val(data.totalPayValue);
+    }
+
+
+    // Hide header bottom
+    let lastScrollTop = 0;
+    let headerBottomHeight = $('.header-bottom').outerHeight();
 
     $(window).scroll(function (event) {
-        var st = $(this).scrollTop();
+        let st = $(this).scrollTop();
 
         if (st > lastScrollTop && st > headerBottomHeight) {
             $('.header-bottom').addClass('hide');
-            console.log(st)
         } else {
             if (st + $(window).height() >= headerBottomHeight) {
                 $('.header-bottom').removeClass('hide');
