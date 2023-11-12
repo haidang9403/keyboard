@@ -3,7 +3,7 @@
     if(isset($productInfo['category'])){
         $popular = "Phổ biến";
         $new = "Mới";
-        $discount = "Giảm giá";
+        $hot = "Hot";
 
         $state = 'badge--' . $productInfo['category'];
         $textState = ${$productInfo['category']};

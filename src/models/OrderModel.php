@@ -9,8 +9,17 @@ class OrderModel extends BaseModel {
         parent::__construct();
     }
 
-    public function getAll($selection){
+    public function getAll($selection = ["*"]){
         return $this->all(self::TABLE, $selection);
+    }
+
+    public function get($condition, $value, $selection=['*'], $limit = null, $offset = null, $order = null){
+        return $this->find(self::TABLE, $condition, $value, $selection, $limit, $offset, $order);
+    }
+
+    public function getAllOrdering($condition, $value , $selection = ["*"],$limit = null, $offset = null){
+        return $this->join(self::TABLE, ['users' => ['id', 'user_id']],
+                            $condition, $value , $selection,$limit, $offset);
     }
 
     public function getById($id, $selection = ['*']){

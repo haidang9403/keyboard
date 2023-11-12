@@ -3,7 +3,7 @@
     $modifyCategory = 'category--' . ($modify ?? 'popular');
     $titleCategory = $title ?? (isset($modify) ? 
                     ($modify == 'popular' ? "Danh mục phổ biến" : 
-                    ($modify == 'discount' ? "Danh mục khuyến mãi" : "Sản phẩm mới")) 
+                    ($modify == 'hot' ? "Danh mục bán chạy" : "Sản phẩm mới")) 
                     : "Danh mục");
 ?>
 

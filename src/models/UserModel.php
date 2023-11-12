@@ -9,8 +9,12 @@ class UserModel extends BaseModel {
         parent::__construct();
     }
 
-    public function getAll($selection, $limit){
-        return $this->all(self::TABLE, $selection, $limit);
+    public function getAll($selection = ["*"]){
+        return $this->all(self::TABLE, $selection);
+    }
+
+    public function get($condition, $value, $selection=['*'], $limit = null, $offset = null, $order = null){
+        return $this->find(self::TABLE, $condition, $value, $selection, $limit, $offset, $order);
     }
 
     public function findById($id, $selection = ['*']){

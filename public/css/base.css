@@ -29,6 +29,7 @@ html {
 
 a {
     text-decoration: none;
+    color: var(--white-color);
 }
 
 ul {
@@ -45,6 +46,10 @@ ul {
 
 .m-top-60 {
     margin-top: 60px !important;
+}
+
+.m-top-40{
+    margin-top: 40px !important;
 }
 
 .m-top-100 {
@@ -69,7 +74,7 @@ ul {
     background-color: var(--purple-color) !important;
 }
 
-.badge--discount {
+.badge--hot {
     background-color: var(--red-color) !important;
 }
 
@@ -104,6 +109,19 @@ ul {
 .btn-white:hover {
     background-color: var(--blue-color);
     color: var(--white-color);
+}
+
+.btn-blue{
+    color: var(--white-color);
+    background-color: var(--blue-color);
+    border: 1px solid var(--blue-color);
+}
+
+.btn-blue:hover{
+    background-color: var(--blue-color);
+    border: 1px solid var(--blue-color);
+    color: var(--white-color);
+    opacity: 0.8;
 }
 
 .btn.disabled{

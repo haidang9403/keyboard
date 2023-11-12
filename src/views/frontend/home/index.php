@@ -18,7 +18,7 @@ partial('heading', [
             view('frontend.home.size');
 
             partial('sub-category',[
-                'modify' => 'discount',
+                'modify' => 'hot',
                 'products' => $productDiscounts,
                 'layout' => 'horizontal'
             ]);

@@ -29,7 +29,7 @@ header .logo h2 {
   color: var(--white-color);
 }
 
-header .search input {
+.search input {
   font-size: 1.6rem;
   border: none;
   background-color: var(--box-color);
@@ -37,18 +37,19 @@ header .search input {
   padding: 5px 20px !important;
 }
 
-header .search button {
+.search button {
   background-color: var(--box-color);
   color: var(--placeholder-color);
   font-size: 1.6rem;
+  transition: none;
 }
 
 header .search .form-control:focus {
   box-shadow: none !important;
 }
 
-header .search .form-control:focus ~ button,
-header .search button:hover {
+.search .form-control:focus ~ button,
+.search button:hover {
   background-color: var(--btn-hover-color);
   color: var(--white-color);
 }
@@ -1237,3 +1238,410 @@ button,
 }
 
 /* End Pagination */
+
+/* Admin */
+.admin{
+  margin-top: 110px;
+  overflow: hidden;
+}
+
+.admin .navbar{
+  background-color: var(--box-color);
+  color: var(--text-dark-color);
+  /* height: 580px; */
+  display: flex;
+  align-items: start;
+  overflow: hidden;
+  border-top-right-radius: 5px ;
+  border-bottom-right-radius:5px ;
+}
+
+.admin .navlist{
+  width: 100%;
+  padding: 20px;
+}
+
+.admin .nav-item{
+  width: 100%;
+  padding: 15px 25px;
+  display: flex;
+}
+
+.admin .nav-item .nav-link__text{
+  color:var(--text-dark-color);
+}
+
+.admin .nav-item .nav-link__icon {
+  color: var(--text-dark-color);
+  line-height: 36px;
+}
+
+.admin .nav-item.active{
+  background-color: var(--blue-color);
+}
+
+.admin .nav-item.active .nav-link__text,
+.admin .nav-item.active .nav-link__icon{
+  color: var(--white-color);
+}
+
+.admin .nav-item:not(:first-child){
+  margin-top: 20px;
+}
+
+.admin .nav-link{
+  width: 100%;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--white-color);
+  gap: 15px;
+}
+
+.admin .nav-link__icon{
+  font-size: 2.4rem;
+}
+
+.admin .nav-link__text{
+  line-height: 36px;
+}
+
+.admin .nav-item:not(.active):hover .nav-link__text,
+.admin .nav-item:not(.active):hover .nav-link__icon{
+  color: var(--white-color);
+}
+
+.admin .search{
+  width: 400px;
+  height: 40px;
+}
+
+.admin .search input{
+  box-shadow: none;
+  height: 40px;
+}
+
+.admin .wrapper{
+  padding: 0 40px 0 30px;
+  /* height: 600px; */
+  display: flex;
+  flex-direction: column;
+}
+
+.admin .add-item{
+  background-color: var(--blue-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin .add-item:hover{
+  opacity: 0.8;
+}
+
+.admin .add-item .icon,
+.admin .add-item .text{
+  color: var(--white-color);
+  font-weight: 600;
+}
+
+.admin .add-item .icon{
+  font-size: 1.8rem;
+}
+
+.admin .add-item .text{
+  font-size: 1.6rem;
+}
+
+.table .table-item {
+  padding: 10px 15px;
+  background-color: var(--bg-color);
+  color: var(--white-color);
+  font-size: 1.6rem;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table .table-item img{
+  width: 100%;
+  height: 70px;
+  object-fit: cover;
+  
+}
+
+.product-manager-list .table .table-row .table-item{
+  min-height: 90px;
+}
+
+.table .table-heading .table-item{
+  background-color: var(--white-color);
+  color: var(--black-color);
+}
+
+.table .table-row,
+.table .table-heading{
+  border-color: var(--box-color);
+  border-width: 10px;
+}
+
+.admin .pagination-wrapper{
+  flex-grow: 1;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.admin .navbar{
+  position: fixed;
+  left: 0;
+}
+
+.table-item .action-item{
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.table-item .action-item:not(:first-child){
+  margin-left: 10px;
+}
+
+.table-item .action-item.delete{
+  background-color: var(--red-color);
+  
+}
+
+.table-item .action-item.edit {
+  background-color: var(--blue-color);
+}
+
+.table-item .action-item:hover{
+  opacity: 0.8;
+}
+
+.admin .pagination{
+  margin-bottom: 10px !important;
+}
+
+.admin .return{
+  width: 140px;
+  font-size: 2.4rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--white-color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.admin .return span{
+  font-size: 2rem;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.admin .return:hover{
+  color: var(--blue-color);
+}
+
+/* Admin add */
+.admin form{
+  background-color: var(--box-color);
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+  .admin form input,
+  .admin form label,
+  .admin form textarea,
+  .admin form select{
+    font-size: 1.6rem;
+  }
+
+  .admin form .title-form{
+    color: var(--white-color);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .admin form label{
+    color: var(--white-color);
+    margin-bottom: 10px;
+  }
+
+  .admin form .form-group{
+    margin-bottom: 22px;
+  }
+
+  .admin form button{
+    font-size: 1.6rem;
+    padding: 10px 20px;
+  }
+
+  .admin form button .icon{
+    padding-right: 5px;
+    font-weight: 600;
+  }
+
+  .admin form.action-item {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #loading{
+    color: var(--white-color);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .admin .img-title{
+    color: var(--white-color);
+    font-size: 1.6rem;
+    margin: 15px 0;
+  }
+
+/* End admin */
+
+/* Modal */
+
+#delete-confirm-label {
+  font-size: 1.8rem;
+}
+
+.modal-header button{
+  font-size: 1.2rem;
+}
+
+.modal-body {
+  font-size: 1.6rem;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.modal-footer button{
+  font-size: 1.4rem;
+}
+
+/* Navbar profile */
+.profile-nav  .navbar {
+  background-color: var(--box-color);
+  color: var(--text-dark-color);
+  /* height: 580px; */
+  display: flex;
+  align-items: start;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.profile-nav .navlist {
+  width: 100%;
+  padding: 20px;
+}
+
+.profile-nav .nav-item {
+  width: 100%;
+  padding: 15px 25px;
+  display: flex;
+}
+
+.profile-nav .nav-item .nav-link__text {
+  color: var(--text-dark-color);
+}
+
+.profile-nav .nav-item .nav-link__icon {
+  color: var(--text-dark-color);
+}
+
+.profile-nav .nav-item.active {
+  background-color: var(--blue-color);
+}
+
+.profile-nav .nav-item.active .nav-link__text,
+.profile-nav .nav-item.active .nav-link__icon {
+  color: var(--white-color);
+}
+
+.profile-nav .nav-item:not(:first-child) {
+  margin-top: 20px;
+}
+
+.profile-nav .nav-link {
+  width: 100%;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--white-color);
+  gap: 15px;
+}
+
+.profile-nav .nav-link__icon {
+  font-size: 2.2rem;
+  line-height: 36px;
+}
+
+.profile-nav .nav-link__text {
+  line-height: 36px;
+}
+
+.profile-nav .nav-item:not(.active):hover .nav-link__text,
+.profile-nav .nav-item:not(.active):hover .nav-link__icon {
+  color: var(--white-color);
+}
+
+.profile-content{
+  background-color: var(--box-color);
+  border-radius: 5px;
+}
+
+.profile-info{
+  padding: 20px 0 50px;
+}
+
+.profile-info form label,
+.profile-info form input{
+  font-size: 1.6rem;
+  color: var(--white-color)
+}
+
+.profile-info form input{
+  color: var(--black-color)
+}
+
+
+.profile-info button{
+  font-size: 1.6rem;
+}
+
+.avatar{
+  margin-bottom: 50px;
+}
+
+.avatar .name{
+  font-size: 1.8rem;
+  color: var(--white-color);
+}
+
+.avatar .name .badge{ 
+  font-size: 1.4rem;
+
+}
+
+.avatar .username{
+  font-size: 1.4rem;
+  color: var(--text-dark-color);
+}
+
+/* order shipping */
+.shipping-order button{
+  font-size: 1.8rem;
+  font-weight: 600;
+}

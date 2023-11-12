@@ -40,9 +40,11 @@ class CartController extends BaseController {
             $cartItems = $this->orderDetails->getAllInfo($condition,  $valueCdt , ["order_details.*", "products.thumbnail", "products.title"]);
             
             $total_money = 0;
+
             foreach($cartItems as $item){
                 $total_money += $item['total_money'];
             }
+
             $_SESSION['total_money'] = $total_money;
 
             
@@ -157,6 +159,7 @@ class CartController extends BaseController {
         foreach($cartItems as $item){
             $total_money += $item['total_money'];
         }
+        
         $_SESSION['total_money'] = $total_money;
 
         $fee = intval($_SESSION['fee'] ?? 12000);
@@ -197,19 +200,19 @@ class CartController extends BaseController {
 
     public function order(){
 
-        // Lưu dữ liệu vào session nếu bị lỗi
-        $this->saveFormValues($_POST);
         
         $data = $this->filterOrderData($_POST);
         $model_errors = $this->order->validate($data);
-
+        
         if(empty($model_errors)){ // Không có lỗi
             // Lưu dữ liệu vào data order và set status = 1
             $this->setOrder($data);
         }
-
+        
         // Nếu có lỗi
-         redirect('/cart', ['errors' => $model_errors]);
+        // Lưu dữ liệu vào session nếu bị lỗi
+        $this->saveFormValues($_POST);
+        redirect('/cart', ['errors' => $model_errors]);
         
     }
 

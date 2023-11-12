@@ -67,8 +67,8 @@
                     <input type="checkbox" class="btn-check state-check" id="btn-check-state-2" autocomplete="off" value="new">
                     <label class="btn btn-checkbox m-2" for="btn-check-state-2">Mới</label>
         
-                    <input type="checkbox" class="btn-check state-check" id="btn-check-state-3" autocomplete="off" value="discount">
-                    <label class="btn btn-checkbox m-2" for="btn-check-state-3">Giảm giá</label>
+                    <input type="checkbox" class="btn-check state-check" id="btn-check-state-3" autocomplete="off" value="hot">
+                    <label class="btn btn-checkbox m-2" for="btn-check-state-3">Hot</label>
             
                 </div>
             </div>

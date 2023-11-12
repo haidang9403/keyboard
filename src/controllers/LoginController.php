@@ -21,7 +21,6 @@ class LoginController extends BaseController {
 
         $data = [
             'old' => $this->getSavedFormValues(),
-            'messages' => session_get_once('messages'),
             'errors' => session_get_once('errors')
         ];
         

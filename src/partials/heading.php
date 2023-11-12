@@ -32,7 +32,7 @@
                                     <h3 class="title mb-0">Giỏ hàng</h3>
                                 </div>
                             </a>
-                            <a href="<?= isset($infoUser['id']) ? "#" : "/login" ?>" class="account d-flex align-items-center">
+                            <a href="<?= isset($infoUser['id']) ? "/profile" : "/login" ?>" class="account d-flex align-items-center">
                                 <div class="account-icon">
                                     <i class="fa-solid fa-user icon"></i>
                                 </div>

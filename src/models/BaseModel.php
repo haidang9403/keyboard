@@ -16,6 +16,7 @@ class BaseModel extends Database{
     
     public function all($table, $selection = ['*']){
         $columns = implode(',', $selection);
+
         $sql = "SELECT ${columns} FROM ${table}";
 
         $statement = $this->db->prepare($sql);
@@ -108,7 +109,7 @@ class BaseModel extends Database{
         
     }
 
-    public function join($table, $data, $condition, $valueCondition, $selection = ["*"]){
+    public function join($table, $data, $condition, $valueCondition, $selection = ["*"], $limit = null, $offset = null){
         // selection
         $columns = implode(',', $selection);
         
@@ -123,7 +124,21 @@ class BaseModel extends Database{
         // Where
         $where = $this->string_condition($condition);
 
-        $sql = "SELECT $columns FROM $table $join WHERE $where";
+        $sql = "SELECT $columns FROM $table $join";
+
+        if(isset($where) && !empty($where)){
+            $sql .=  " WHERE $where ";
+        }
+
+        if(isset($limit)){
+            $sql .= " LIMIT :limit ";
+            $valueCondition[':limit'] = $limit;
+        }
+
+        if(isset($offset)){
+            $sql .= " OFFSET :offset ";
+            $valueCondition[':offset'] = $offset;
+        }
 
         $statement = $this->db->prepare($sql);
 
@@ -205,7 +220,7 @@ class BaseModel extends Database{
         }
 
         $statement->execute();
-
+        
     }
 
     private function string_condition(array $data)

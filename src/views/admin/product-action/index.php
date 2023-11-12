@@ -42,14 +42,28 @@
                     </nav>
                 </div>
                 <div class="col-10">
-                    <?php
-                        view("admin.$type",[
-                            "array_data" => $data,
-                            "page_array" => $page_array,
-                            "current_page" => $current_page,
-                            "type" => strval($type)
-                        ]);
-                    ?>
+                    <div class="wrapper">
+                        <?php
+                            switch($action){
+                                case 'add':
+                                    view("admin.product-action.add",[
+                                        "type" => strval($type),
+                                        'old' => $old,
+                                        'errors' => $errors
+                                    ]);
+                                    break;
+                                case 'edit':
+                                    view("admin.product-action.edit",[
+                                        "type" => strval($type),
+                                        "data" => $data,
+                                        'errors' => $errors
+                                    ]);
+                                    break;
+                                default:
+                                    NOT_FOUND();
+                            }
+                        ?>
+                    </div>
                 </div>
             </div>
         <!-- </div> -->
