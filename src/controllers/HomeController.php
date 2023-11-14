@@ -13,109 +13,40 @@ class HomeController extends BaseController {
     }
 
     public function index() {
-        $productIntro = [
-            'id' => 1,
-            'title' => 'Ducky One 2 Mini',
-            'category' => 'popular',
-            'thumbnail' => './images/uploads/product-1.webp',
-            'quantity' => 12,
-            'price' => 2800000
-        ];
+        $productIntro = $this->product->getMAX('id');
 
-        $productPopulars = [
-             [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'popular',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ],
-            [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'popular',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ],
-             [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'popular',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ],
-            [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'popular',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ]
-        ];
+        $productPopulars = $this->product->get(
+            ['category' => " = :category "],
+            ['category' => 'popular'],
+            ['*'],
+            5,
+            null,
+            " price DESC "
+        );
 
-        $productDiscounts = [
-            [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'discount',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ],
-            [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'discount',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ]
-        ];
+        $productHots = $this->product->get(
+            ['category' => " = :category "],
+            ['category' => 'hot'],
+            ['*'],
+            2,
+            null,
+            " price DESC "
+        );
 
-        $productNews = [
-                         [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'new',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ],
-            [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'new',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ],
-             [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'new',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ],
-            [
-                'id' => 1,
-                'title' => 'Ducky One 2 Mini',
-                'category' => 'new',
-                'thumbnail' => './images/uploads/product-1.webp',
-                'quantity' => 12,
-                'price' => 2800000
-            ]
-        ];
+        $productNews = $this->product->get(
+            ['category' => " = :category "],
+            ['category' => 'new'],
+            ['*'],
+            4,
+            null,
+            " price DESC "
+        );
 
         return $this->view('frontend.home.index',[
             'pageTitle' => 'Trang chủ',
             'productIntro' => $productIntro,
             'productPopulars' => $productPopulars,
-            'productDiscounts' => $productDiscounts,
+            'productHots' => $productHots,
             'productNews' => $productNews,
             'infoUser' => $this->infoUser
         ]);

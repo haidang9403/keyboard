@@ -27,14 +27,26 @@
                         <h2 class="text-uppercase mb-0">KeyBoard</h2>
                     </a>
                     <div class="action d-flex justify-content-around h-100">
-                        <a href="<?= isset($infoUser['id']) ? "#" : "/login" ?>" class="account d-flex align-items-center">
-                            <div class="account-icon">
-                                <i class="fa-solid fa-user icon"></i>
-                            </div>
-                            <div class="account-title ">
-                                <h3 class="title mb-0"><?= htmlspecialchars($infoUser['fullname'] ?? $infoUser['username'] ?? "Đăng nhập")?></h3>
-                            </div>
-                        </a>
+                        <div class="account-wrapper">
+                            <a href="<?= isset($infoUser['id']) ? "/admin?type=profile" : "/login" ?>" class="account d-flex align-items-center">
+                                <div class="account-icon">
+                                    <i class="fa-solid fa-user icon"></i>
+                                </div>
+                                <div class="account-title ">
+                                    <h3 class="title mb-0"><?= htmlspecialchars($infoUser['fullname'] ?? $infoUser['username'] ?? "Đăng nhập")?></h3>
+                                </div>
+                            </a>
+                            <?php if(isset($infoUser['id'])) :?>
+                                        <div class="menu-user shadow">
+                                            <a class="menu-item" href="/admin?type=profile">
+                                                Thông tin tài khoản
+                                            </a>
+                                            <a class="menu-item" href="/logout">
+                                                Đăng xuất
+                                            </a>
+                                        </div>
+                            <?php endif ?>
+                        </div>
                     </div>
                 </div>
             </div>

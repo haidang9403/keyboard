@@ -40,7 +40,8 @@
                         switch($type){
                             case 'user':
                                 view('frontend.profile.profile-user',[
-                                    'infoUser' => $infoUser
+                                    'infoUser' => $infoUser,
+                                    'errors' => $errors
                                 ]);
                                 break;
                             case 'order':

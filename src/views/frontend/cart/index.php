@@ -23,10 +23,17 @@
                     Giỏ hàng
                 </div>
                 <div class="cart-content">
-                    <?php view('frontend.cart.cart-list',[
-                        'cartItems' => $cartItems
-                    ]);
-                    ?>
+                    <?php if(!empty($cartItems)): ?>
+                        <?php view('frontend.cart.cart-list',[
+                            'cartItems' => $cartItems
+                        ]);
+                        ?>
+                    <?php else: ?>
+                        <div class="cart-empty rounded">
+                            <p class="mb-0">Giỏ hàng hiện đang trống!</p>
+                            <img src="./images/emptys/cart-empty.png" alt="">
+                        </div>
+                    <?php endif ?>
                     <form class="cart-form" action="/cart?action=order" method="POST">
                         <div class="row">
                             <div class="col-8">
@@ -36,7 +43,7 @@
                                         <div class="mb-3">
                                             <label for="inputFullname" class="form-label">Họ và tên người nhận </label>
                                             <input type="text" name="fullname" class="form-control <?= isset($errors['fullname']) ? ' is-invalid' : '' ?>" id="inputFullname" value="<?= isset($old['fullname']) ? htmlspecialchars($old['fullname']) : '' ?>" placeholder="Nhập họ và tên...">
-                                             <?php if (isset($errors['fullname'])) : ?>
+                                            <?php if (isset($errors['fullname'])) : ?>
                                                 <span class="invalid-feedback">
                                                     <strong><?= htmlspecialchars($errors['fullname']) ?></strong>
                                                 </span>
@@ -113,7 +120,7 @@
                                         <input type="number" hidden name="total_pay" value="<?=$total_pay?>" >
                                         <div class="value"><small>₫</small><?php echo htmlspecialchars(number_format($total_pay, 0, ",", "."))?></div>
                                     </div>
-                                    <button type="submit" id="submitCart" class="btn <?= $total_money == 0 ? 'disabled' : ''?> btn-white"> Thanh toán</button>
+                                    <button type="submit" id="submitCart" class="btn <?= $total_money == 0 ? 'disabled' : ''?> btn-white"> Đặt hàng</button>
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,8 @@
 
 <div class="product-list">
     <div class="row g-3">
-        <?php
+        <?php if(!empty($products)) : ?>
+            <?php
             $layout = $layout ?? 'vertical';
             $classCol = $layout == "horizontal" ? "col-6" : "col-4";
             foreach($products as $product){
@@ -14,8 +15,15 @@
                 echo "</div>";
 
             }
-        ?>
+            ?>
+        <?php else: ?>
+            <div class="no-result rounded">
+                <img src="./images/emptys/no-search.png" alt="">
+                <p>Không tìm thấy kết quả!</p>
+            </div>
+        <?php endif ?>
     </div>
+</div>
     <?php if(isset($page_array)):?>
     <nav aria-label="Page navigation" class="d-flex justify-content-center">
         <ul class="pagination">
@@ -51,7 +59,15 @@
     <script>
         // Pagition
         $(document).ready(function() {
-            let URL_PAGINATE = '/category?action=paginate';
+
+                // Lấy string query
+            let urlParam = function (name) {
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                return results !== null ? results[1] || 0 : false;
+            }
+                    
+            let keyword = urlParam('keyword') ? '&keyword=' + urlParam('keyword') : '';
+            let URL_PAGINATE = '/category?action=paginate' + keyword;
             $(".page-link").on("click", function (e) {
                 e.preventDefault();
                 var page = $(this).attr("page");
@@ -99,4 +115,3 @@
 
     </script>
     <?php endif ?>
-</div>

@@ -26,8 +26,12 @@ class AdminController extends BaseController {
             exit();
         }
 
-        $this->type = $_GET["type"] ?? 'user';
-        $modelClass = "Model\\".ucfirst($this->type) . "Model";
+        $this->type = $_GET["type"] ?? 'profile';
+        if($this->type == 'profile'){
+            $modelClass = "Model\UserModel";
+        }else{
+            $modelClass = "Model\\".ucfirst($this->type) . "Model";
+        }
         
         if(class_exists( $modelClass )) {
             $this->model = new $modelClass;
@@ -37,15 +41,9 @@ class AdminController extends BaseController {
     }
 
     public function index() {
-        
-        // $type = $_GET["type"] ?? 'user';
-        // $modelClass = "Model\\".ucfirst($type) . "Model";
-        
-        // if(class_exists( $modelClass )) {
-        //     $model = new $modelClass;
-        // }else{
-        //     NOT_FOUND();
-        // }
+        $allData = [];
+        $data = [];
+        $limit = 1;
 
         switch($this->type){
             case 'user':
@@ -90,7 +88,8 @@ class AdminController extends BaseController {
             "pageTitle" => $pageTitle,
             "page_array" => $page_array,
             "data" => $data,
-            "current_page" => 1
+            "current_page" => 1,
+            'errors' => session_get_once('errors')
         ]);
     }
 
@@ -326,5 +325,30 @@ class AdminController extends BaseController {
             'data' => $data,
             'errors' => session_get_once('errors')
         ]);
+    }
+
+        public function editProfile(){
+        if($this->type == 'profile'){
+            $data = $this->filterProfileData($_POST);
+        }
+
+        $model_errors = $this->model->validateInfo($data);
+        if(empty($model_errors)){ // Thành công
+            $this->updateProfile($data);
+        }
+
+        redirect("/admin?type=$this->type", ['errors' => $model_errors]);
+    }
+
+    protected function filterProfileData($data){
+        return [
+            'fullname' => $data['fullname'] ?? null,
+            'email' => $data['email'] ?? null
+        ];
+    }
+
+    protected function updateProfile(array $data){
+        $this->model->set($data,['id' => ' = :id '], ['id' => $this->currentUser['id']]);
+        redirect("/admin?type=$this->type");
     }
 }

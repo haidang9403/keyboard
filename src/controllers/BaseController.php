@@ -35,6 +35,7 @@ class BaseController {
     
                 $this->infoUser = [
                     'id' => $currentUser['id'] ?? null,
+                    'email' => $currentUser['email'] ?? null,
                     'fullname' => $currentUser['fullname'] ?? null,
                     'username' => $currentUser['username'] ?? null,
                     'num_product' => $numProduct

@@ -8,11 +8,13 @@ partial('heading', [
 ?>
    <main>
         <div class="container">
-            <?php
-                partial('breadcrumb',[
-                    'productTitle' => $productInfo['title']
-                ])
-            ?>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 text-white">
+                    <li class="breadcrumb-item fs-5 text-white"><a href="/">Trang chủ</a></li>
+                    <li class="breadcrumb-item fs-5 text-white"><a href="/category">Danh mục</a></li>
+                    <li class="breadcrumb-item fs-5 text-white active" aria-current="page"><?= htmlspecialchars($productInfo['title'] ?? "Sản phẩm")?></li>
+                </ol>
+            </nav>
 
             <div class="product-detail">
                 <div class="title title-lg"><?=htmlspecialchars($productInfo['title'])?></div>

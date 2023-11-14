@@ -19,17 +19,17 @@ partial('heading', [
 
             partial('sub-category',[
                 'modify' => 'hot',
-                'products' => $productDiscounts,
+                'products' => $productHots,
                 'layout' => 'horizontal'
             ]);
 
             partial('sub-category',[
                 'introduce' => [
                     'banner' => './images/banners/banner-blog.jpg',
-                    'productIntro' => $productIntro
+                    'productIntro' => $productPopulars[0]
                 ],
                 'modify' => 'popular',
-                'products' => $productPopulars
+                'products' => array_slice($productPopulars, 1) // lấy từ phẩn tử thứ 2
             ]);
 
             view('frontend.home.advertise');

@@ -60,11 +60,21 @@ class UserModel extends BaseModel {
         return $this->save(self::TABLE, $data);
     }
 
-    // public function update(){
+    public function validateInfo($data){
+        $errors = [];
 
-    // }
+        if(!$data['fullname']){
+            $errors['fullname'] = 'Tên không hợp lệ';
+        }
 
-    // public function delete(){
+        if(isset($data['email'])  &&  !empty($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+            $errors['email'] = "Email không hợp lệ";
+        }
 
-    // }
+        return $errors;
+    }
+
+    public function set($data, $condition, $valueCondition){
+        return $this->update(self::TABLE,$data, $condition, $valueCondition);
+    }
 }

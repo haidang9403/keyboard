@@ -1,5 +1,33 @@
 $(document).ready(function () {
 
+    // searching
+    // Lắng nghe sự kiện khi người dùng nhấn Enter trong ô input
+    $('#searchInput').keypress(function (event) {
+        if (event.which === 13) { // Kiểm tra phím Enter
+            search();
+        }
+    });
+
+    // Lắng nghe sự kiện khi người dùng nhấn nút tìm kiếm
+    $('#searchButton').click(function () {
+        search();
+    });
+
+    // Hàm thực hiện tìm kiếm và chuyển hướng đến URL mới
+    function search() {
+        var keyword = $('#searchInput').val();
+        if (keyword.trim() !== "") {
+            var url = '/category?keyword=' + encodeURIComponent(keyword);
+            window.location.href = url;
+        }
+    }
+
+    // Lấy string query
+    let urlParam = function (name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        return results !== null ? results[1] || 0 : false;
+    }
+
     ////// Login
     $(".label-log").click(function () {
         if (!$(".login .checkbox").prop("checked")) {
@@ -56,7 +84,8 @@ $(document).ready(function () {
     });
 
     // Filter price
-    let URL_FILTER = '/category?action=filter';
+    let keyword = urlParam('keyword') ? '&keyword=' + urlParam('keyword') : '';
+    let URL_FILTER = `/category?action=filter${keyword}`;
     let dataFilter = {}; // Lưu dữ liệu filter dạng oject
     let isInputting = false;
 

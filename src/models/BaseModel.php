@@ -14,12 +14,29 @@ class BaseModel extends Database{
         $this->db = $this->connect();
     }
     
-    public function all($table, $selection = ['*']){
+    public function all($table,$condition = [], $values = [], $selection = ['*']){
         $columns = implode(',', $selection);
+
+        $where = $this->string_condition($condition);
 
         $sql = "SELECT ${columns} FROM ${table}";
 
+         if(isset($where) && !empty($where)){
+            $sql .=  " WHERE $where ";
+        }
+
+        
+
         $statement = $this->db->prepare($sql);
+
+        foreach($values as $key => $value){
+            if(is_int($value)){
+                $statement->bindValue($key, $value, PDO::PARAM_INT);
+            }else {
+                $statement->bindValue($key, $value);
+            }
+        }
+
         $statement->execute();
 
         $data = [];

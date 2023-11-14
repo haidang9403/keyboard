@@ -14,6 +14,14 @@
                 <div class="col-2">
                     <nav class="navbar p-0">
                         <div class="navlist">
+                            <a href="/admin?type=profile" class="nav-item rounded <?=$type == 'profile' ? " active " : ''?>">
+                                <div class="nav-link d-flex align-item-center">
+                                    <i class="bi bi-person-circle nav-link__icon"></i>
+                                    <div class="nav-link__text">
+                                        Thông tin
+                                    </div>
+                                </div>
+                            </a>
                             <a href="/admin?type=user" class="nav-item rounded <?=$type == 'user' ? " active " : ''?>">
                                 <div class="nav-link d-flex align-item-center">
                                     <i class="bi bi-people nav-link__icon"></i>
@@ -47,7 +55,9 @@
                             "array_data" => $data,
                             "page_array" => $page_array,
                             "current_page" => $current_page,
-                            "type" => strval($type)
+                            "type" => strval($type),
+                            'infoUser' => $infoUser,
+                            'errors' => $errors
                         ]);
                     ?>
                 </div>

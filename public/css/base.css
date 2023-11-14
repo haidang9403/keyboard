@@ -14,6 +14,8 @@
     --blue-color: #1768e3;
     --text-dark-color: #777777;
     --img-bg-color: #31313193;
+    --border-color: #4e4e4e;
+    --accordion-color: #d7daec;
 }
 
 * {
@@ -162,4 +164,14 @@ body {
     background-color: var(--bg-color);
 }
 
+/* Animation */
+@keyframes zoomIn {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
 

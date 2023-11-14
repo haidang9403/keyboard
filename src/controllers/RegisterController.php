@@ -18,15 +18,15 @@ class RegisterController extends BaseController {
 
     
     public function index() {
-        // Lưu giá trị của form vào session trừ password khi bị lỗi
-        $this->saveFormValues($_POST, ['signup-password'],['confirm-password']);
-
+        
         $data = $this->filterUserData($_POST);
         $model_errors = $this->user->validate($data);
         if(empty($model_errors)){ // Thành công
-             $this->createUser($data);
+            $this->createUser($data);
         }
-
+        
+        // Lưu giá trị của form vào session trừ password khi bị lỗi
+        $this->saveFormValues($_POST, ['signup-password'],['confirm-password']);
         // Dữ liệu không hợp lệ...
         redirect('/login', ['errors' => $model_errors]);
     }

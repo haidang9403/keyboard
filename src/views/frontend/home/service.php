@@ -8,37 +8,37 @@
                                 1
                             </div>
                             <p class="service-text  mb-0">
-                                Giao hàng trên toàn quốc
+                                Giao hàng toàn quốc
                             </p>
                         </div>
                     </div>
                     <div class="col">
                         <div class="service-item rounded">
                             <div class="order rounded d-flex justify-content-center align-items-center">
-                                1
+                                2
                             </div>
                             <p class="service-text  mb-0">
-                                Giao hàng trên toàn quốc
+                                Chọn Lựa Đa Dạng
                             </p>
                         </div>
                     </div>
                     <div class="col">
                         <div class="service-item rounded">
                             <div class="order rounded d-flex justify-content-center align-items-center">
-                                1
+                                3
                             </div>
                             <p class="service-text  mb-0">
-                                Giao hàng trên toàn quốc
+                                Chất Lượng Đảm Bảo
                             </p>
                         </div>
                     </div>
                     <div class="col">
                         <div class="service-item rounded">
                             <div class="order rounded d-flex justify-content-center align-items-center">
-                                1
+                                4
                             </div>
                             <p class="service-text mb-0">
-                                Giao hàng trên toàn quốc
+                                Bảo Hành Dài Hạn
                             </p>
                         </div>
                     </div>

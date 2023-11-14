@@ -5,12 +5,12 @@
                 <img src="./images/avatar/person-circle.svg" class="rounded-circle mb-3" style="width: 150px;"
                 alt="Avatar" />
 
-                <h3 class="mb-2 name"><strong><?=htmlspecialchars($infoUser['fullname'])?></strong> <span class="badge bg-primary">Khách hàng</span></h3>
+                <h3 class="mb-2 name"><strong><?=htmlspecialchars($infoUser['fullname'])?></strong> <span class="badge bg-danger">Quản trị viên</span></h3>
                 <p class="username">Tên tài khoản: <?=htmlspecialchars($infoUser['username'])?></p>
             </div>
         </div>
         <div class="offset-2 col-8">
-            <form action="/profile?type=user&action=edit" method="POST">
+            <form action="/admin?type=profile&action=editProfile" method="POST">
                 <div class="row mb-5">
                     <label for="fullname" class="col-sm-2 col-form-label">Họ và tên</label>
                     <div class="col-sm-10">
