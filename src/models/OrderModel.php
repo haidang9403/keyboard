@@ -67,16 +67,6 @@ class OrderModel extends BaseModel {
             return false;
         }
 
-        // Kiểm tra xem địa chỉ có chứa các ký tự đặc biệt không hợp lệ hay không
-        /*if (preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬]/', $address)) {
-            return false;
-        }*/
-
-        // Kiểm tra xem địa chỉ có ký tự số và chữ cái không bao gồm ký tự đặc biệt hay không
-        // if (!preg_match('/^[A-Za-z0-9 ]+$/', $address)) {
-        //     return false;
-        // }
-
         // Nếu không có điều gì không hợp lệ, địa chỉ được coi là hợp lệ
         return true;
     }

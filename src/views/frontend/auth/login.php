@@ -36,10 +36,7 @@
                                             <?php endif ?>
                                          </div>
                                          <button href="#" class="btn btn-login mt-4">Đăng nhập</button>
-                                         
-                                         <p class="mb-0 mt-4 text-center">
-                                             <a href="" class="link">Quên mật khẩu?</a>
-                                         </p>
+                                
                                      </div>
                                  </form>
                                  <form class="card-back" action="/register" method="post">

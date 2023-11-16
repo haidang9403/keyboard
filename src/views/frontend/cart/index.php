@@ -3,7 +3,8 @@
 
 <?php
     partial('header',[
-        'pageTitle' => $pageTitle
+        'pageTitle' => $pageTitle,
+        'infoUser' => $infoUser
     ]);
 
     partial('heading',[
@@ -23,17 +24,10 @@
                     Giỏ hàng
                 </div>
                 <div class="cart-content">
-                    <?php if(!empty($cartItems)): ?>
                         <?php view('frontend.cart.cart-list',[
                             'cartItems' => $cartItems
                         ]);
                         ?>
-                    <?php else: ?>
-                        <div class="cart-empty rounded">
-                            <p class="mb-0">Giỏ hàng hiện đang trống!</p>
-                            <img src="./images/emptys/cart-empty.png" alt="">
-                        </div>
-                    <?php endif ?>
                     <form class="cart-form" action="/cart?action=order" method="POST">
                         <div class="row">
                             <div class="col-8">

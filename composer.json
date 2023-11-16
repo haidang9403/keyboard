@@ -15,8 +15,7 @@
       "DB\\": "src/db/"
     },
     "files": [
-      "src/helper/functions.php",
-      "boostrap.php"
+      "src/helper/functions.php"
     ]
   },
   "minimum-stability": "beta",

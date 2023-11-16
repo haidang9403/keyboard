@@ -48,10 +48,6 @@ class ProductModel extends BaseModel {
         return $this->delete(self::TABLE, $condition, $valueCondition);
     }
 
-    public function getProductOffers(){
-        
-    }
-
     public function validate($data){
         $errors = [];
 

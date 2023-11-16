@@ -12,6 +12,12 @@
         }
         else {
             // in ra giỏ hàng rỗng
+            echo '
+            <div class="cart-empty rounded">
+                <p class="mb-0">Giỏ hàng hiện đang trống!</p>
+                <img src="./images/emptys/cart-empty.png" alt="">
+            </div>
+            ';
         }
         ?>
     <script>

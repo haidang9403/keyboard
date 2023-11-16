@@ -1,6 +1,7 @@
 <?php
 partial("header", [
-    'pageTitle' => $productInfo['title']
+    'pageTitle' => $productInfo['title'],
+    'infoUser' => $infoUser
 ]);
 partial('heading', [
     'infoUser' => $infoUser
@@ -25,7 +26,7 @@ partial('heading', [
                     <div class="col-6">
                         <div class="product-detail__info rounded">
                             <div class="product-quantyti">
-                                Trong kho
+                                <?php echo "Còn lại " . htmlspecialchars($productInfo['quantity']) . " sản phẩm"?>
                             </div>
 
                             <div class="product-detail-info__item product-layout">
@@ -91,9 +92,6 @@ partial('heading', [
                     </div>
                 </div>
             </div>
-        <script>
-
-     </script>
             <?php
                 partial('sub-category',[
                     'products' => $productOffers,
@@ -102,6 +100,31 @@ partial('heading', [
                 ])
             ?>
         </div>
+         <div class="toast linear align-items-center text-bg-warning border-0 " role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="toast-body">
+                    Bạn đã thêm vượt quá số lượng
+                </div>
+                <button type="button" class="btn-close  me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="modal" id="notify-login" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Chưa đăng nhập</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Đăng nhập để tiếp tục thao tác</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id='modal-login'>Đăng nhập</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </main>
 <?php
 partial("footer");

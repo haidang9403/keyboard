@@ -17,7 +17,7 @@
                                 Tổng tiền: ₫<?php echo htmlspecialchars(number_format($data['total_pay'], 0, ",", "."))?>
                             </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseOne<?=$index?>" class="accordion-collapse collapse show">
+                        <div id="panelsStayOpen-collapseOne<?=$index?>" class="accordion-collapse collapse">
                             <div class="accordion-body">
                                 <?php foreach($data['items'] as $item): ?>
                                 <div class="cart-product-list__item rounded">

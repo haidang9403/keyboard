@@ -17,5 +17,15 @@
         <?= $pageTitle ?? "E Commerce Keyboard";
         ?>
     </title>
+
+    <?php
+        if(!empty($infoUser)){
+            $isLogin = $infoUser['id'];
+        } else {
+            $isLogin = null;
+        }
+        echo "<script>let isLogin = " . json_encode($isLogin) . ";</script>";
+    ?>
+
 </head>
 <body>

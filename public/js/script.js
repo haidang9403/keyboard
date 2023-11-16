@@ -85,7 +85,7 @@ $(document).ready(function () {
 
     // Filter price
     let keyword = urlParam('keyword') ? '&keyword=' + urlParam('keyword') : '';
-    let URL_FILTER = `/category?action=filter${keyword}`;
+    const URL_FILTER = `/category?action=filter${keyword}`;
     let dataFilter = {}; // Lưu dữ liệu filter dạng oject
     let isInputting = false;
 
@@ -110,6 +110,15 @@ $(document).ready(function () {
 
             isInputting = false;
         }
+    })
+
+    $('input.is-invalid').on('input', function () {
+        let input = $(this);
+        input.removeClass('is-invalid');
+
+        input.siblings('.is-invalid').removeClass('is-invalid');
+        let $invalidFeedback = input.nextAll('.invalid-feedback');
+        $invalidFeedback.remove();
     })
 
 
@@ -169,23 +178,56 @@ $(document).ready(function () {
     }
 
     // Add product in page product details
-    let URL_ADD_CART = '/cart?action=add';
+    const URL_ADD_CART = '/cart?action=add';
 
 
     $('.product-detail__info .product-cart button').on("click", function (e) {
         e.preventDefault();
-        let dataCart = {};
-        let idProduct = $(this).data('id');
-        let quantity = parseInt($('.product-cart .quantity-number').text());
+        if (isLogin != null) {
+            let dataCart = {};
+            let idProduct = $(this).data('id');
+            let quantity = parseInt($('.product-cart .quantity-number').text());
 
-        dataCart.idProduct = idProduct;
-        dataCart.numProduct = quantity;
+            dataCart.idProduct = idProduct;
+            dataCart.numProduct = quantity;
 
-        ajax(URL_ADD_CART, dataCart, renderCartNumber);
+            ajax(URL_ADD_CART, dataCart, renderCart);
+        } else {
+            let myModal = new bootstrap.Modal(document.getElementById('notify-login'), {
+                backdrop: 'static'
+            });
+            myModal.show();
+            $('#modal-login').one('click',
+                function () {
+                    window.location.href = '/login';
+                });
+        }
     });
 
-    function renderCartNumber(response) {
-        $('.cart .num-product').html(response);
+
+    let isToastVisible = false;
+    function renderCart(response) {
+        if (response != 'null') {
+            $('.cart .num-product').html(response);
+        } else {
+            if (!isToastVisible) {
+                $('.toast').show();
+                isToastVisible = true;
+
+                $('.toast .btn-close').on('click', function () {
+                    $('.toast').hide();
+                    isToastVisible = false;
+                });
+
+                // Tự động tắt toast sau 5 giây nếu nó vẫn đang hiển thị
+                setTimeout(function () {
+                    if (isToastVisible) {
+                        $('.toast').hide();
+                        isToastVisible = false;
+                    }
+                }, 5000);
+            }
+        }
     }
 
     // Ajax
@@ -251,4 +293,15 @@ $(document).ready(function () {
 
         lastScrollTop = st;
     });
+
+    // validate password in change password
+    $('.profile-info #password ').on('input', function () {
+        let password = $(this).val();
+
+        ajax('/profile?type=user&action=checkPass', { password }, handleInputPass);
+    })
+
+    function handleInputPass(dataJSON) {
+        let data
+    }
 })

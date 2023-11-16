@@ -11,12 +11,6 @@
     <div class="title">
         <?=htmlspecialchars($titleCategory)?>
     </div>
-    <?php
-    // partial('product-list', [
-    //     $layout => ($layout ?? "vertical"),
-    //     'introduce' => $introduce
-    // ]);
-    ?>
     <div class="product-list">
         <div class="row g-3">
             <?php

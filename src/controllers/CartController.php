@@ -81,8 +81,7 @@ class CartController extends BaseController {
 
             
             $order_info =  $this->orderDetails->getProductInCart($cart['id'],$id_product); // Tìm sản phẩm trong giỏ hàng
-            if($num_product <  intval($data_product['quantity'])){
-
+            if($num_product <=  intval($data_product['quantity']) - ($order_info['num'] ?? 0)){
                 if(empty($order_info))
                 { // chưa có sản phẩm trong giỏ hàng
                     $order_data = [
@@ -105,14 +104,14 @@ class CartController extends BaseController {
                     $order_data['total_money'] = (intval($num) +  $num_product)*intval($data_product['price']);
                     $this->orderDetails->set($order_data, $condition, $valueCondition);
                 }
+                $total_product = $this->infoUser['num_product'] + $num_product;
+        
+                echo htmlspecialchars($total_product);
             } else{
-                $num_product = 0;
+                echo json_encode(null);
             }
         }
 
-        $total_product = $this->infoUser['num_product'] + $num_product;
-
-        echo htmlspecialchars($total_product);
     }   
 
     public function delete(){

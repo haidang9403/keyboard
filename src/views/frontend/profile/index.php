@@ -1,6 +1,7 @@
 <?php
     partial('header',[
-        'pageTitle' => "Thông tin cá nhân"
+        'pageTitle' => "Thông tin cá nhân",
+        'infoUser' => $infoUser
     ]);
 
     partial('heading',[

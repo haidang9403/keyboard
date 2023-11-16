@@ -154,7 +154,7 @@ main {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  height: 462px;
+  height: 465px;
   background-color: var(--box-color);
 }
 
@@ -1750,6 +1750,10 @@ button,
   margin-bottom: 20px;
 }
 
+.shipping-order {
+  background-color: var(--accordion-color);
+}
+
 /* menu account */
 .account-wrapper{
   position: relative;
@@ -1831,4 +1835,20 @@ button,
 
 .search-keyword a:hover{
   background-color: var(--red-color);
+}
+
+
+.toast{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999;
+}
+
+.toast button {
+  font-size: 1.2rem;
+}
+
+.toast-body{
+  font-size: 1.6rem;
 }

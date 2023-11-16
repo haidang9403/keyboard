@@ -88,7 +88,7 @@
                                 <label for="layout" class="form-label">Thiết kế</label>
                                 <select id="layout" name="layout" class="form-select" >
                                     <option value="60%" <?=$data['layout'] == '60%' ? 'selected' : ''?>>60%</option>
-                                    <option value="65%" <?=$data['layout'] == '65%' ? 'selected' : ''?>>65%</option>
+                                    <option value="68%" <?=$data['layout'] == '68%' ? 'selected' : ''?>>68%</option>
                                     <option value="75%" <?=$data['layout'] == '75%' ? 'selected' : ''?>>75%</option>
                                     <option value="80%" <?=$data['layout'] == '80%' ? 'selected' : ''?>>80%</option>
                                     <option value="87%" <?=$data['layout'] == '87%' ? 'selected' : ''?>>87%</option>

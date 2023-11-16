@@ -1,6 +1,7 @@
 <?php
 partial("header", [
-    'pageTitle' => "Danh mục bàn phím"
+    'pageTitle' => "Danh mục bàn phím",
+    'infoUser' => $infoUser
 ]);
 partial('heading', [
     'infoUser' => $infoUser
@@ -36,11 +37,13 @@ partial('heading', [
                                 ?>
                                 <div class="product-list-wrapper">
                                     <?php
+
                                         partial("product-list",[
                                             'products' => $products,
                                             'layout' => 'vertical',
                                             'page_array'=> $page_array,
-                                            'current_page' => $current_page
+                                            'current_page' => $current_page,
+                                            'infoUser' => $infoUser
                                         ]);
                                     ?>
                                 </div>

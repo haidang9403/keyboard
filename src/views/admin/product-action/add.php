@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="category" class="form-label">Danh mục</label>
-                                <select id="category" name="category" class="form-select" value="<?= isset($old['category']) ? htmlspecialchars($old['category']) : '' ?>">
+                                <select id="category" name="category" class="form-select">
                                     <option value="new" selected>Mới</option>
                                     <option value="popular" >Phổ biến</option>
                                     <option value="hot" >Hot</option>
@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="layout" class="form-label">Thiết kế</label>
-                                <select id="layout" name="layout" class="form-select" value="<?= isset($old['layout']) ? htmlspecialchars($old['layout']) : '' ?>">
+                                <select id="layout" name="layout" class="form-select">
                                     <option value="60%" selected>60%</option>
                                     <option value="65%">65%</option>
                                     <option value="75%">75%</option>
