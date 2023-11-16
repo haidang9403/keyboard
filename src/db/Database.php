@@ -4,10 +4,6 @@ namespace DB;
 use PDO;
 
 class Database{
-    const DB_HOST = "localhost";
-    const DB_NAME = "ct275_project";
-    const DB_USER = "root";
-    Const DB_PASS = "";
     private $connect;
 
     public function connect(){

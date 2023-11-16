@@ -72,7 +72,7 @@ partial('heading', [
                             <div class="product-cart">
                                 <div class="d-flex align-items-end h-100">
                                         <div class="product-price">
-                                            <?php echo htmlspecialchars(number_format($productInfo['price'], 0, ",", ".")) . " VNĐ"?>
+                                            <small>₫</small><?php echo htmlspecialchars(number_format($productInfo['price'], 0, ",", "."))?>
                                         </div>
                                         <div class="product-choose-quantity">
                                             <div class="quantity-item quantity-decrease">
@@ -126,6 +126,67 @@ partial('heading', [
         </div>
     </div>
     </main>
+    <script>
+        $(document).ready(function() {
+
+            let URL_ADD_CART = '/cart?action=add';
+            let dataCart = {};
+
+            $('.product-list .product-cart button').on("click", function (e) {
+                e.preventDefault();
+                if(isLogin != null){
+                    let idProduct = $(this).data('id');
+                    
+                    dataCart.idProduct = idProduct;
+    
+                    callback(URL_ADD_CART, dataCart, renderCart);
+                } else {
+                    let myModal = new bootstrap.Modal(document.getElementById('notify-login'), {
+                        backdrop: 'static'
+                    });
+                    myModal.show();
+                    $('#modal-login').one('click',
+                        function() {
+                             window.location.href = '/login';
+                    });
+                }
+            });
+
+            function renderCart(response) {
+                if(response != 'null'){
+                    $('.cart .num-product').html(response);
+                } else{
+                    $('.toast').show();
+                    let isToastVisible = true;
+                    $('.toast .btn-close').on('click', function () {
+                        $('.toast').hide();
+                        isToastVisible = false;
+                    });
+
+                    setTimeout(function () {
+                        if (isToastVisible) {
+                            $('.toast').hide();
+                            isToastVisible = false;
+                        }
+                    }, 5000);
+                }
+            }
+
+            function callback(url,data,success) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: data,
+                    success: success,
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                })
+            }
+        });
+
+
+    </script>
 <?php
 partial("footer");
 ?>

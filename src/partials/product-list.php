@@ -82,10 +82,8 @@
         </div>
     </div>
     <script>
-        // Pagition
         $(document).ready(function() {
 
-                // Lấy string query
             let urlParam = function (name) {
                 var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
                 return results !== null ? results[1] || 0 : false;
@@ -105,21 +103,18 @@
                 $('.product-list-wrapper').html(response);
             }
 
-
-            // Add cart
-
             let URL_ADD_CART = '/cart?action=add';
             let dataCart = {};
 
             $('.product-cart button').on("click", function (e) {
                 e.preventDefault();
-                if(isLogin != null){ // Đã đăng nhập
+                if(isLogin != null){
                     let idProduct = $(this).data('id');
                     
                     dataCart.idProduct = idProduct;
     
                     callback(URL_ADD_CART, dataCart, renderCart);
-                } else { // Chưa đăng nhập
+                } else {
                     let myModal = new bootstrap.Modal(document.getElementById('notify-login'), {
                         backdrop: 'static'
                     });
@@ -142,7 +137,6 @@
                         isToastVisible = false;
                     });
 
-                    // Tự động tắt toast sau 5 giây nếu nó vẫn đang hiển thị
                     setTimeout(function () {
                         if (isToastVisible) {
                             $('.toast').hide();

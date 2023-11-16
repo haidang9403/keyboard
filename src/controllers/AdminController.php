@@ -18,12 +18,10 @@ class AdminController extends BaseController {
         if(Session::isUserLoggedIn()){
             $this->currentUser = $this->user->findUserById($_SESSION['user_id']);
             if($this->currentUser['role'] != 'admin'){
-                header("HTTP/1.1 403 Forbidden");
-                exit();
+                NOT_ACCESSS();
             }
         } else {
-            header("HTTP/1.1 403 Forbidden");
-            exit();
+            NOT_ACCESSS();
         }
 
         $this->type = $_GET["type"] ?? 'profile';

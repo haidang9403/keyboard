@@ -35,6 +35,16 @@ function redirect($location, array $data = [])
 // Lỗi 404
 function NOT_FOUND(){
     header("HTTP/1.0 404 Not Found");
+
+    require('404.php');
+    exit();
+}
+
+// Lỗi 403
+function NOT_ACCESSS(){
+    header("HTTP/1.1 403 Forbidden");
+
+    require('403.php');
     exit();
 }
 

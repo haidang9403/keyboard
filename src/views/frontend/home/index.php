@@ -71,6 +71,7 @@ partial('heading', [
             </div>
         </div>
         </div>
+    </main>
     <script>
         $(document).ready(function() {
 
@@ -134,7 +135,6 @@ partial('heading', [
 
 
     </script>
-    </main>
 
 <?php
 partial('footer');

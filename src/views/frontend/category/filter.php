@@ -14,16 +14,16 @@
                     <div class="accordion-body">
                         <div class="price-range">
                             <div class="input-group">
-                                <input class="rounded filter-price price-min" type="number" min="0" max="6000000" step="100000" value="0">
+                                <input class="rounded filter-price price-min" type="number" min="0" max="10000000" step="100000" value="0">
                                 <span class="text-divided"><i class="bi bi-dash"></i></span>
-                                <input class="rounded filter-price price-max" type="number" min="0" max="6000000" step="100000" value="6000000">
+                                <input class="rounded filter-price price-max" type="number" min="0" max="10000000" step="100000" value="10000000">
                             </div>
                             <div class="slider">
                                 <div class="progress"></div>
                             </div>
                             <div class="range-group">
-                                <input type="range" class="range range-min" min="0" max="6000000" step="100000" value="0">
-                                <input type="range" class="range range-max" min="0" max="6000000" step="100000" value="6000000">
+                                <input type="range" class="range range-min" min="0" max="10000000" step="100000" value="0">
+                                <input type="range" class="range range-max" min="0" max="10000000" step="100000" value="10000000">
                             </div>
                         
                         </div>
