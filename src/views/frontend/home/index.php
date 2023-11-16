@@ -11,7 +11,8 @@ partial('heading', [
         <div class="container">
         <?php 
             view('frontend.home.introduction',[
-                'productIntro' => $productIntro
+                'productIntro' => $productIntro,
+                'banner' => './images/banners/banner-home.jpg'
             ]);
 
             view('frontend.home.service');
@@ -26,7 +27,7 @@ partial('heading', [
 
             partial('sub-category',[
                 'introduce' => [
-                    'banner' => './images/banners/banner-blog.jpg',
+                    'banner' => './images/banners/banner-popular.jpg',
                     'productIntro' => $productPopulars[0]
                 ],
                 'modify' => 'popular',

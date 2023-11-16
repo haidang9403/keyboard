@@ -4,7 +4,9 @@
                 <div class="row">
                     <div class="col">
                         <div class="logo footer-top__item">
-                            KEYBOARD
+                            <a href="/home" class="logo d-flex align-items-center w-50">
+                                <img src="./images/logo/logo-litekeys.svg" class="img-fluid" alt="">
+                            </a>
                         </div>
                     </div>
                     <div class="col">

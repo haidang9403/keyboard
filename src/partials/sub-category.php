@@ -17,7 +17,8 @@
                 $classCol = $layout == "vertical" ? "col-3" : "col-6";
                 if(isset($introduce)){
                     view('frontend.home.introduction',[
-                        'productIntro' => $introduce['productIntro']
+                        'productIntro' => $introduce['productIntro'],
+                        'banner' => $introduce['banner']
                     ]);
                 }
                 foreach($products as $product){

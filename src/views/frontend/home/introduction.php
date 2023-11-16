@@ -13,7 +13,7 @@
         <!-- ===== Slider ====== -->
         <div class="col-9">
             <div class="slider-wrapper rounded">
-                <img class="slider" src="../images/sliders/slider-1.jpg" alt="">
+                <img class="slider" src="<?=$banner?>" alt="">
             </div>
         </div>
     </div>

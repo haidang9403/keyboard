@@ -12,7 +12,7 @@
                     </div>
                     <div class="col">
                         <div class="banner-wrapper rounded">
-                            <img class="banner-md" src="../images/sliders/slider-1.jpg" alt="Banner">
+                            <img class="banner-md" src="./images/banners/banner-advertise.jpg" alt="Banner">
                         </div>
                     </div>
                 </div>

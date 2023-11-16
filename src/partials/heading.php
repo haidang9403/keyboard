@@ -4,12 +4,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-3">
-                        <a href="/" class="logo d-flex align-items-center">
-                            <h2 class="text-uppercase mb-0">KeyBoard</h2>
+                        <a href="/home" class="logo d-flex align-items-center">
+                            <img src="./images/logo/logo-litekeys.svg" class="img-fluid" alt="">
                         </a>
                     </div>
-                    <div class="col-5">
-                        <div class="search">
+                    <div class="col-5 d-flex align-items-center">
+                        <div class="search w-100">
                             <div class="input-group">
                                 <input type="text" id="searchInput" name="search" class="form-control" placeholder="Tìm kiếm..." aria-label="Recipient's username"
                                     aria-describedby="searchButton">
@@ -32,7 +32,7 @@
                                     <h3 class="title mb-0">Giỏ hàng</h3>
                                 </div>
                             </a>
-                            <div class="account-wrapper">
+                            <div class="account-wrapper d-flex align-items-center">
                                 <a href="<?= isset($infoUser['id']) ? "/profile" : "/login" ?>" class="account d-flex align-items-center">
                                 <div class="account-icon">
                                     <i class="fa-solid fa-user icon"></i>
