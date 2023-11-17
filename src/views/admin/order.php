@@ -1,22 +1,4 @@
  <div class="wrapper">
-    <!-- <div class="d-flex justify-content-between">
-        <div class="search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Recipient's username"
-                    aria-describedby="button-addon">
-                <button class="btn px-4" type="button" id="button-addon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-        </div>
-
-        <div class="add-item">
-            <i class="bi bi-plus-lg icon"></i>
-            <div class="text">
-                Thêm
-            </div>
-        </div>
-    </div> -->
     <div class="order-list m-top-40">
         <table class="table">
             <thead >
@@ -25,7 +7,6 @@
                     <th class="table-item" scope="col">Tài khoản</th>
                     <th class="table-item" scope="col">Tên người nhận</th>
                     <th class="table-item" scope="col">SĐT</th>
-                    <!-- <th class="table-item" scope="col">Đơn hàng</th> -->
                     <th class="table-item" scope="col">Địa chỉ</th>
                     <th class="table-item" scope="col">Lời nhắn</th>
                     <th class="table-item" scope="col">Ngày đặt hàng</th>
@@ -103,6 +84,7 @@
 
             function renderProductManager(response){
                 $('.wrapper').replaceWith(response);
+                $('html, body').animate({scrollTop: 0}, 300);
             }
 
             function callback(url,data,success) {

@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="header-bottom">
-            <div class="container-xxl">
+            <div class="container">
                 <div class="row">
                     <div class="d-flex justify-content-between">
                         <nav class="d-flex">

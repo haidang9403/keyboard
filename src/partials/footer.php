@@ -62,7 +62,7 @@
             </div>
             <div class="footer-bottom p-bottom-60">
                 <div class="copyright">
-                    Copyright &copy; 2023 KEYBOARDS
+                    Copyright &copy; 2023 LITEKEYS
                 </div>
             </div>
         </div>

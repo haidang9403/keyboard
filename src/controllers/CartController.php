@@ -16,6 +16,9 @@ class CartController extends BaseController {
         $this->order = new Order;
         $this->orderDetails = new OrderDetails;
         $this->product = new Product;
+        if(empty($this->infoUser)){
+            redirect("/home");
+        }
         
     }
 

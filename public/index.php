@@ -7,6 +7,7 @@ $dotenv->load();
 
 session_start();
 
+// Route
 // Lấy tên Controller
 $current_uri = $_SERVER['REQUEST_URI'];
 $parts = explode('?', $current_uri);

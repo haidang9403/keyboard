@@ -1,22 +1,4 @@
  <div class="wrapper">
-    <!-- <div class="d-flex justify-content-between">
-        <div class="search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Recipient's username"
-                    aria-describedby="button-addon">
-                <button class="btn px-4" type="button" id="button-addon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-        </div>
-
-        <div class="add-item">
-            <i class="bi bi-plus-lg icon"></i>
-            <div class="text">
-                Thêm
-            </div>
-        </div>
-    </div> -->
     <div class="user-list m-top-40">
         <table class="table">
             <thead >
@@ -27,8 +9,6 @@
                     <th class="table-item" scope="col">Email</th>
                     <th class="table-item" scope="col">Ngày tạo</th>
                     <th class="table-item" scope="col">Cập nhật</th>
-                    <!-- <th class="table-item" scope="col">Đơn hàng</th> -->
-                    <!-- <th class="table-item" scope="col">Thao tác</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -46,9 +26,7 @@
                         ?>
                         <td class="table-item"><?=htmlspecialchars($dateCreated)?></td>
                         <td class="table-item"><?=htmlspecialchars($dateUpdate)?></td>
-                        <!-- <td class="table-item">0</td> -->
-                        <!-- <td class="table-item"><i data-id="" class="bi bi-trash3 action-item delete"></i></td> -->
-                    </tr>
+                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
@@ -102,6 +80,7 @@
 
             function renderProductManager(response){
                 $('.wrapper').replaceWith(response);
+                $('html, body').animate({scrollTop: 0}, 300);
             }
 
             function callback(url,data,success) {

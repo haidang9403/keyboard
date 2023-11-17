@@ -146,6 +146,7 @@
 
                 function renderWrapper(response){
                     $('.wrapper').replaceWith(response);
+                     $('html, body').animate({scrollTop: 0}, 300);
                 }
 
                 $(".action-item.delete").on("click", function(){

@@ -9,7 +9,7 @@ class LoginController extends BaseController {
     public $user, $product;
     public function __construct(){
         parent::__construct();
-        if(isset($this->idUser)){
+        if(!empty($this->infoUser)){
             redirect("/home");
         } else {
             $this->user = new User();
@@ -18,6 +18,9 @@ class LoginController extends BaseController {
 
     
     public function index() {
+        if(!isset($_SESSION['pre_url'])){
+            $_SESSION['pre_url'] = $_SERVER['HTTP_REFERER'];
+        }
 
         $data = [
             'old' => $this->getSavedFormValues(),
@@ -32,12 +35,14 @@ class LoginController extends BaseController {
         $username = $_POST['username'] ?? null;
         $password = $_POST['password'] ?? null;
         if($username && $password){
-            // $user->$username = $username;
-            // $user->$password = $password;
             $isValidUsername = $this->user->findUsername($username);
             if($isValidUsername){ // Tài khoản tồn tại
                 if(Session::login($username,$password)){ // Đăng nhập thành công
-                    redirect("/home");
+                    if(isset($_SESSION['pre_url'])){
+                        redirect(session_get_once('pre_url'));
+                    }else {
+                        redirect("/home");
+                    }
                 }else { // Sai mật khẩu
                     $errors['password'] ="Sai mật khẩu";
                 }

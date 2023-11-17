@@ -15,7 +15,7 @@
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 text-white">
-                    <li class="breadcrumb-item fs-5 text-white"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item fs-5 text-white"><a href="/home">Trang chủ</a></li>
                     <li class="breadcrumb-item fs-5 text-white active" aria-current="page">Giỏ hàng</li>
                 </ol>
             </nav>

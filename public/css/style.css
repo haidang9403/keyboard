@@ -1177,6 +1177,20 @@ button,
   display: block;
 }
 
+.return-home{
+  color: var(--white-color);
+  font-size: 1.4rem;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 20;
+  padding: 10px 15px;
+}
+
+.return-home:hover{
+  color: var(--blue-color);
+}
+
 .login .form-group {
   position: relative;
   display: block;

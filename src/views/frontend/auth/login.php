@@ -11,8 +11,12 @@
                          </h6>
                          <label class="reg-log" for="reg-log"></label>
                          <div class="card-3d-wrap mx-auto">
-                             <div class="card-3d-wrapper">
+                             <div class="card-3d-wrapper position-relative">
                                  <form class="card-front" action="/login?action=login" method="POST">
+                                     <a href="/home" class="return-home">
+                                        <i class="bi bi-arrow-return-left"></i>
+                                        <span>Trang chủ</span>
+                                     </a>
                                      <div class="center-wrap">
                                          <div class="section text-center">
                                              <h4 class="mb-4 pb-3">Đăng nhập</h4>
@@ -40,6 +44,10 @@
                                      </div>
                                  </form>
                                  <form class="card-back" action="/register" method="post">
+                                    <a href="/home" class="return-home">
+                                        <i class="bi bi-arrow-return-left"></i>
+                                        <span>Trang chủ</span>
+                                     </a>
                                      <div class="center-wrap">
                                         <div class="section text-center">
                                             <h4 class="mb-4 pb-3">Đăng ký</h4>

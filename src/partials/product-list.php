@@ -101,6 +101,7 @@
 
             function renderProductList(response){
                 $('.product-list-wrapper').html(response);
+                $('html, body').animate({scrollTop: 0}, 300);
             }
 
             let URL_ADD_CART = '/cart?action=add';
