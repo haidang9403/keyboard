@@ -66,8 +66,8 @@
                                 'Kết nối: ' .  htmlspecialchars($data['connect']);
                             ?></td>
                             <td class="table-item"><?=htmlspecialchars($data['quantity'])?></td>
-                            <td class="table-item"><?=htmlspecialchars($dateUpdate)?></td>
                             <td class="table-item"><?=htmlspecialchars($dateCreated)?></td>
+                            <td class="table-item"><?=htmlspecialchars($dateUpdate)?></td>
                             <td class="table-item">
                                 <a href="/admin?type=product&action=editView&id=<?=$data['id']?>">
                                     <i class="bi bi-pencil-square action-item edit"></i>

@@ -126,7 +126,7 @@ class BaseModel extends Database{
         
     }
 
-    public function join($table, $data, $condition, $valueCondition, $selection = ["*"], $limit = null, $offset = null){
+    public function join($table, $data, $condition, $valueCondition, $selection = ["*"], $limit = null, $offset = null, $order = null){
         // selection
         $columns = implode(',', $selection);
         
@@ -145,6 +145,11 @@ class BaseModel extends Database{
 
         if(isset($where) && !empty($where)){
             $sql .=  " WHERE $where ";
+        }
+
+        if(isset($order)){
+            $order = str_replace(';', '', $order);
+            $sql .= " ORDER BY $order ";
         }
 
         if(isset($limit)){

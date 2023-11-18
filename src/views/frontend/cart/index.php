@@ -84,11 +84,6 @@
                                             <p class="subcontent mb-0">bằng tiền mặt</p>
                                         </label>
                                         
-                                        <input type="radio" class="btn-check" name="pay-method" id="bank-method" value="bank" autocomplete="off">
-                                        <!-- <label class="btn btn-radio" for="bank-method">
-                                            Thanh toán online
-                                            <p class="subcontent mb-0">qua thẻ tín dụng, visa,...</p>
-                                        </label> -->
                                     </div>
                                     <div class="info-note">
                                         <div class="mb-3">

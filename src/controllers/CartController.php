@@ -252,7 +252,7 @@ class CartController extends BaseController {
             'address' => $data["address"] ?? NULL,
             'phone' => $data['phone'] ?? NULL,
             'note' => $data['note'] ?? NULL,
-            'total_pay' => $data['total_pay']
+            'total_pay' => $data['total_pay'] ?? NULL
         ];
     }
 }

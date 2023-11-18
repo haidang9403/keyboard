@@ -9,15 +9,11 @@
         </a>
         
         <div class="product-choose-quantity">
-            <!-- <div class="quantity-item quantity-decrease">
-                <i class="bi bi-dash"></i>
-            </div> -->
+
             <div class="quantity-item quantity-number rounded">
                 <?= htmlspecialchars($cartItem['num']) ?>
             </div>
-            <!-- <div class="quantity-item quantity-increase">
-                <i class="bi bi-plus"></i>
-            </div> -->
+
         </div>
 
         <div class="product-price">

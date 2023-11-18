@@ -1,0 +1,31 @@
+
+sql
+CREATE TABLE `orders`(
+    id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    fullname varchar(50) NOT NULL,
+    phone_number varchar(20) NOT NULL,
+    address varchar(200) NOT NULL,
+    note varchar(100),
+    status INT NOT NULL DEFAULT 0,
+    total_money INT,
+    order_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB;
+
+CREATE TABLE `order_details`(
+    id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    price INT NOT NULL,
+    num INT NOT NULL,
+    total_money INT NOT NULL
+)ENGINE=InnoDB;
+
+ALTER TABLE order_details 
+ADD FOREIGN KEY (order_id) REFERENCES orders(id);
+
+ALTER TABLE order_details 
+ADD FOREIGN KEY (product_id) REFERENCES products(id);
+
+ALTER TABLE orders
+ADD FOREIGN KEY (user_id) REFERENCES users(id);

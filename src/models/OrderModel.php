@@ -17,9 +17,9 @@ class OrderModel extends BaseModel {
         return $this->find(self::TABLE, $condition, $value, $selection, $limit, $offset, $order);
     }
 
-    public function getAllOrdering($condition, $value , $selection = ["*"],$limit = null, $offset = null){
+    public function getAllOrdering($condition, $value , $selection = ["*"],$limit = null, $offset = null, $order = null){
         return $this->join(self::TABLE, ['users' => ['id', 'user_id']],
-                            $condition, $value , $selection,$limit, $offset);
+                            $condition, $value , $selection,$limit, $offset, $order);
     }
 
     public function getById($id, $selection = ['*']){
@@ -56,6 +56,10 @@ class OrderModel extends BaseModel {
             $errors['phone'] = "Hãy nhập số điện thoại";
         } elseif(!$this->isValidPhoneNumber($data['phone'])){
             $errors['phone'] = "Số điện thoại không hợp lệ";
+        }
+
+        if(intval($data['total_pay'] <= 25000)){
+            $errors["total_pay"] = "Thêm sản phẩm";
         }
 
         return $errors;

@@ -102,6 +102,7 @@ class ProfileController extends BaseController {
     }
 
     protected function update(array $data){
+        $data["updated_at"] = date('Y-m-d H:i:s'); // Lấy thời gian hiện tại
         $this->model->set($data,['id' => ' = :id '], ['id' => $this->infoUser['id']]);
         redirect("/profile?type=$this->type");
     }

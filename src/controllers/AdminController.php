@@ -25,6 +25,13 @@ class AdminController extends BaseController {
         }
 
         $this->type = $_GET["type"] ?? 'profile';
+        if(isset($_GET['action'])){
+            if($_GET['action'] == 'addView' || $_GET['action'] == 'editView'){
+                if($this->type != 'product'){
+                    NOT_FOUND();
+                }
+            }
+        }
         if($this->type == 'profile'){
             $modelClass = "Model\UserModel";
         }else{
@@ -72,11 +79,11 @@ class AdminController extends BaseController {
         $page_array = pagination($total_page, $current_page);
 
         if($this->type == 'user'){
-            $data = $this->model->get(["role" => " = :role "],["role" => "user"],["*"],$limit, $offset);
-        } elseif($this->type == 'product') {
-            $data = $this->model->get([],[],["*"],$limit, $offset);
+            $data = $this->model->get(["role" => " = :role "],["role" => "user"],["*"],$limit, $offset, ' updated_at DESC ');
+        } elseif( $this->type == 'product') {
+            $data = $this->model->get([],[],["*"], $limit , $offset, ' update_at DESC ');
         } elseif($this->type == 'order'){
-            $data = $this->model->getAllOrdering(["status" => " = :status "],["status" => 1],["orders.*","users.username"],$limit, $offset);
+            $data = $this->model->getAllOrdering(["status" => " = :status "],["status" => 1],["orders.*","users.username"], $limit, $offset, ' order_date DESC ');
         }
 
 
@@ -101,7 +108,7 @@ class AdminController extends BaseController {
             $allData = $this->model->getAll();
             $limit = 10;
         } elseif($this->type == 'order'){
-            $data = $this->model->getAllOrdering(["status" => " = :status "],["status" => 1],["orders.*","users.username"],$limit, $offset);
+            $allData = $this->model->getAllOrdering(["status" => " = :status "],["status" => 1],["orders.*","users.username"]);
             $limit = 16;
         }
 
@@ -113,9 +120,11 @@ class AdminController extends BaseController {
         $page_array = pagination($total_page, $current_page);
 
         if($this->type == 'user'){
-            $data = $this->model->get(["role" => " = :role "],["role" => "user"],["*"],$limit, $offset);
-        } else {
-            $data = $this->model->get([],[],["*"],$limit, $offset);
+            $data = $this->model->get(["role" => " = :role "],["role" => "user"],["*"],$limit, $offset, ' updated_at DESC ');
+        } elseif( $this->type == 'product') {
+            $data = $this->model->get([],[],["*"], $limit , $offset, ' update_at DESC ');
+        } elseif($this->type == 'order'){
+            $data = $this->model->getAllOrdering(["status" => " = :status "],["status" => 1],["orders.*","users.username"], $limit, $offset, ' order_date DESC ');
         }
 
         echo view("admin.product",[
@@ -165,14 +174,14 @@ class AdminController extends BaseController {
         } else {
             $data['id'] = $_POST['id'];
         }
-
+        
         $data['thumbnail_old'] = $_POST['thumbnail_old'] ?? null;
         $data['thumbnail_file'] = $_FILES['thumbnail'] ?? null;
-
+        
         if($data['thumbnail_file']['error'] > 0){ // Nếu không cập nhật file mới
             unset($data['thumbnail_file']);
         };
-
+        
         $model_errors = $this->model->validate($data);
         
         if(empty($model_errors)){ // Không có lỗi
@@ -185,7 +194,7 @@ class AdminController extends BaseController {
             'errors' => $model_errors
         ]);
     }
-
+    
     public function add(){
         
         $data = $this->filterData($_POST);
@@ -206,7 +215,7 @@ class AdminController extends BaseController {
         ]);
         
     }
-
+    
     protected function create($data){
         switch($this->type){
             case "product":
@@ -223,22 +232,22 @@ class AdminController extends BaseController {
                     redirect("/admin?type=$this->type&action=addView", ['errors' => $model_errors]);
                 }
                 break;
+            }
+        
         }
         
-    }
-
-    protected function update($data){
-        switch($this->type){
-            case "product":
-                $id = $data['id'];
-                
-                
-                if(isset($data['thumbnail_file'])){
-                    $thumbnailNew = './images/uploads/' . $data['thumbnail_file']['name'];
-                    $data["thumbnail"] = $thumbnailNew;
-                    $targetFile = session_get_once('targetFile');
-
-                    if (move_uploaded_file($data["thumbnail_file"]["tmp_name"], $targetFile)) {
+        protected function update($data){
+            switch($this->type){
+                case "product":
+                    $id = $data['id'];
+                    $data["update_at"] = date('Y-m-d H:i:s'); // Lấy thời gian hiện tại
+                    
+                    if(isset($data['thumbnail_file'])){
+                        $thumbnailNew = './images/uploads/' . $data['thumbnail_file']['name'];
+                        $data["thumbnail"] = $thumbnailNew;
+                        $targetFile = session_get_once('targetFile');
+                        
+                        if (move_uploaded_file($data["thumbnail_file"]["tmp_name"], $targetFile)) {
                         
                         // Xóa ảnh cũ
                         $targetDirOld = realpath(__DIR__ . "/../../public/images/uploads/");
@@ -255,11 +264,13 @@ class AdminController extends BaseController {
                         }
                     } else {
                         $errors['thumbnail'] = "Có lỗi trong quá trình tải file";
-        
+                        
                         redirect("/admin?type=$this->type&action=editView&id=$id", ['errors' => $model_errors]);
-        
+                        
                     }
                 } else {
+                    unset($data["thumbnail_old"]);
+                    unset($data["thumbnail_file"]);
                     $this->model->set($data,["id" => "= :id"], ["id" => $data['id']]);
                     redirect("/admin?type=$this->type");
                 }
@@ -346,6 +357,7 @@ class AdminController extends BaseController {
     }
 
     protected function updateProfile(array $data){
+        $data["updated_at"] = date('Y-m-d H:i:s'); // Lấy thời gian hiện tại
         $this->model->set($data,['id' => ' = :id '], ['id' => $this->currentUser['id']]);
         redirect("/admin?type=$this->type");
     }
