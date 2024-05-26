@@ -62,8 +62,6 @@ class CartController extends BaseController {
                 'old' => $this->getSavedFormValues(),
                 'errors' => session_get_once('errors')
             ]);
-        }else { // Chưa đăng nhập
-            // Yêu cầu đăng nhập
         }
     }
 
